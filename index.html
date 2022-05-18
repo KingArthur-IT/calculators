@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+  <head>
+    <meta charset="UTF-8">
+    <title>NM</title><!--[if IE]>
+    <meta http-equiv="X-UA-Compatible" content="IE = edge"><![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no , maximum-scale=1.0, user-scalable=no">
+    <meta name="keywords" content="NM">
+    <meta name="description" content="NM">
+    <meta name="it-rating" content="it-rat-fa9ef9f8c2095cc94c5d33de60ee9bb3"><!-- inject:font preload -->
+    <link rel="preload" href="assets/fonts/RivieraNights-Bold.woff2" as="font" type="font/woff2" crossorigin="">
+    <link rel="preload" href="assets/fonts/RivieraNights-Medium.woff2" as="font" type="font/woff2" crossorigin=""><!-- endinject -->
+    <!-- Favicon-->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+    <meta name="theme-color" content="#0C0B0B">
+    <!-- CSS-->
+    <link rel="stylesheet" type="text/css" href="assets/css/app.css?v=863">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- IE Support--><!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script><![endif]-->
+  </head>
+  <body class="calculator-page selects-inside">
+    <div class="wrapper">
+      <header class="header">
+        <div class="header__wrap">
+          <div class="global-container"><a class="header__logo" href="index.html"><img class="logo__img" src="./assets/svg/logo.svg" alt="logo"></a>
+            <div class="header__menu"> 
+              <div class="header-menu__inner">
+                <ul class="header-menu__list"> 
+                  <li> <a class="header__link" href="#"> 
+                      <div class="trigger"> 
+                        <p>Buy a home</p>
+                      </div></a></li>
+                  <li> <a class="header__link" href="#"> 
+                      <div class="trigger"> 
+                        <p>Refinance</p>
+                      </div></a></li>
+                  <li> 
+                    <div class="header__link"> 
+                      <div class="trigger"> <a href="#">Resources</a><span class="arrow__link"> 
+                          <svg class="icon icon-arrow ">
+                            <use xlink:href="./assets/icon/symbol/sprite.svg#arrow"></use>
+                          </svg></span></div>
+                      <ul class="header-link__menu"> 
+                        <li> <a class="header__hide-link" href="#">Blog</a></li>
+                        <li><a class="header__hide-link" href="#">Calculators</a></li>
+                        <li><a class="header__hide-link" href="#">Loan Options</a></li>
+                        <li><a class="header__hide-link" href="#">Careers</a></li>
+                        <li><a class="header__hide-link" href="#">About Us</a></li>
+                      </ul>
+                    </div>
+                  </li>
+                </ul><a class="header__number" href="tel:#(844)242-6656">(844)242-6656</a><a class="header__sign-btn" href="#">
+                  <svg class="icon icon-sign ">
+                    <use xlink:href="./assets/icon/symbol/sprite.svg#sign"></use>
+                  </svg><span>Sign in</span></a>
+              </div>
+            </div>
+            <div class="header__side"><a class="header__number" href="tel:#(844)242-6656">(844)242-6656</a><a class="header__sign-btn" href="#">
+                <svg class="icon icon-sign ">
+                  <use xlink:href="./assets/icon/symbol/sprite.svg#sign"></use>
+                </svg><span>Sign in</span></a></div>
+            <button class="header__burger" type="button">
+              <svg class="icon icon-burger ">
+                <use xlink:href="./assets/icon/symbol/sprite.svg#burger"></use>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </header>
+      <div class="content">
+        <div class="global-wrapp calculator-tabs__section" data-aos="fade-up">
+          <div class="global-container"> 
+            <div class="calculator__container"> 
+              <div class="calculator-tabs__buttons"> 
+                <div class="calculator-btn-wrapp">
+                  <button class="calculator-tab__btn active" type="button" data-tab="first"><span>Mortgage Payment Calculator</span></button>
+                </div>
+                <div class="calculator-btn-wrapp">
+                  <button class="calculator-tab__btn" type="button" data-tab="second"><span>Refinance Calculator</span></button>
+                </div>
+                <div class="calculator-btn-wrapp">
+                  <button class="calculator-tab__btn" type="button" data-tab="third"><span>Loan Comparison</span></button>
+                </div>
+                <div class="calculator-btn-wrapp">
+                  <button class="calculator-tab__btn" type="button" data-tab="fourth"><span>Home Affordability</span></button>
+                </div>
+              </div>
+              <div class="calculator-tabs__content"> 
+                <div class="calculator-tab active" data-tab="first">
+                  <form class="calculator-tab__form">
+                    <div class="calculator-fields__block">
+                      <div class="calculator-tab-form__title">Loan Information</div>
+                      <div class="calculator-form__field"> 
+                        <div class="calculator-field__name">Home price</div>
+                        <div class="form-item"> 
+                          <input class="global-input calculator-input" type="text" name="home_price" value="300000">
+                          <div class="calculator-form__icon"> 
+                            <svg class="icon icon-dollar ">
+                              <use xlink:href="./assets/icon/symbol/sprite.svg#dollar"></use>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="calculator-form__field"> 
+                        <div class="calculator-field__name">Down payment</div>
+                        <div class="form-item"> 
+                          <input class="global-input calculator-input" type="text" name="down_payment" value="60000">
+                          <div class="calculator-form__icon"> 
+                            <svg class="icon icon-dollar ">
+                              <use xlink:href="./assets/icon/symbol/sprite.svg#dollar"></use>
+                            </svg>
+                          </div>
+                          <div class="calculator__label">20.00%</div>
+                        </div>
+                      </div>
+                      <div class="calculator-form__field"> 
+                        <div class="calculator-field__name">Loan term</div>
+                        <div class="form-item"> 
+                          <input class="global-input calculator-input" type="number" name="loan_term" value="30">
+                          <div class="calculator-form__icon"> 
+                            <svg class="icon icon-calendar ">
+                              <use xlink:href="./assets/icon/symbol/sprite.svg#calendar"></use>
+                            </svg>
+                          </div>
+                          <div class="calculator__math"> 
+                            <div class="calculator-math__btns"> 
+                              <button class="calculator-math__btn calculator-math-minus" type="button">
+                                <svg class="icon icon-math-m ">
+                                  <use xlink:href="./assets/icon/symbol/sprite.svg#math-m"></use>
+                                </svg>
+                              </button>
+                              <button class="calculator-math__btn calculator-math-plus" type="button">
+                                <svg class="icon icon-math-p ">
+                                  <use xlink:href="./assets/icon/symbol/sprite.svg#math-p"></use>
+                                </svg>
+                              </button>
+                            </div>
+                            <div class="calculator-math__label">Years</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="calculator-form__field"> 
+                        <div class="calculator-field__name">Interest Rate</div>
+                        <div class="form-item"> 
+                          <input class="global-input calculator-input" type="text" name="interest_rate" value="6">
+                          <div class="calculator-form__icon"> 
+                            <svg class="icon icon-percent ">
+                              <use xlink:href="./assets/icon/symbol/sprite.svg#percent"></use>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="calculator-fields__block">
+                      <div class="calculator-tab-form__title">Assumptions</div>
+                      <div class="calculator-form__field"> 
+                        <div class="calculator-field__name">Property tax (montlhy)</div>
+                        <div class="form-item"> 
+                          <input class="global-input calculator-input" type="text" name="property_tax" value="100">
+                          <div class="calculator-form__icon"> 
+                            <svg class="icon icon-dollar ">
+                              <use xlink:href="./assets/icon/symbol/sprite.svg#dollar"></use>
+                            </svg>
+                          </div>
+                          <div class="calculator__label">0.03%</div>
+                        </div>
+                      </div>
+                      <div class="calculator-form__field"> 
+                        <div class="calculator-field__name">Home insurance (monthly)</div>
+                        <div class="form-item"> 
+                          <input class="global-input calculator-input" type="text" name="home_insurance" value="100">
+                          <div class="calculator-form__icon"> 
+                            <svg class="icon icon-dollar ">
+                              <use xlink:href="./assets/icon/symbol/sprite.svg#dollar"></use>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="calculator-form__field"> 
+                        <div class="calculator-field__name">HOA dues (monthly)</div>
+                        <div class="form-item"> 
+                          <input class="global-input calculator-input" type="text" name="HOA_dues" value="100">
+                          <div class="calculator-form__icon"> 
+                            <svg class="icon icon-dollar ">
+                              <use xlink:href="./assets/icon/symbol/sprite.svg#dollar"></use>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                  <div class="calculator-tab__graph">
+                    <div class="calculator-tab-graph__title global-title title-center">Estimated Monthly Payment</div>
+                    <div class="calculator-tab__statistic"> 
+                      <picture class="statistic__img__image">
+                        <source class="statistic__img__img" srcset="web/img/content/calculator/g1.webp" type="image/webp"/><img class="statistic__img__img" src="web/img/content/calculator/g1.png" alt="img"/>
+                      </picture>
+                    </div>
+                  </div>
+                </div>
+                <div class="calculator-tab" data-tab="second">
+                  <form class="calculator-tab__form">
+                    <div class="calculator-fields__block">
+                      <div class="calculator-tab-form__title">Current Loan Information</div>
+                      <div class="calculator-form__field"> 
+                        <div class="calculator-field__name">Remaining balance</div>
+                        <div class="form-item"> 
+                          <input class="global-input calculator-input" type="text" name="remaining_balance" value="50,000">
+                          <div class="calculator-form__icon"> 
+                            <svg class="icon icon-dollar ">
+                              <use xlink:href="./assets/icon/symbol/sprite.svg#dollar"></use>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="calculator-form__field"> 
+                        <div class="calculator-field__name">Interest Rate</div>
+                        <div class="form-item"> 
+                          <input class="global-input calculator-input" type="text" name="interest_rate" value="6">
+                          <div class="calculator-form__icon"> 
+                            <svg class="icon icon-percent ">
+                              <use xlink:href="./assets/icon/symbol/sprite.svg#percent"></use>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="calculator-form__field"> 
+                        <div class="calculator-field__name">Monthly payment</div>
+                        <div class="form-item"> 
+                          <input class="global-input calculator-input" type="text" name="monthly_payment" value="358">
+                          <div class="calculator-form__icon"> 
+                            <svg class="icon icon-dollar ">
+                              <use xlink:href="./assets/icon/symbol/sprite.svg#dollar"></use>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="calculator-fields__block">
+                      <div class="calculator-tab-form__title">New Loan Information</div>
+                      <div class="calculator-form__field"> 
+                        <div class="calculator-field__name">Interest Rate</div>
+                        <div class="form-item"> 
+                          <input class="global-input calculator-input" type="text" name="interest_rate" value="3,3">
+                          <div class="calculator-form__icon"> 
+                            <svg class="icon icon-percent ">
+                              <use xlink:href="./assets/icon/symbol/sprite.svg#percent"></use>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="calculator-form__field"> 
+                        <div class="calculator-field__name">New loan term</div>
+                        <div class="form-item"> 
+                          <input class="global-input calculator-input" type="text" name="new_loan_term" value="30">
+                          <div class="calculator-form__icon"> 
+                            <svg class="icon icon-calendar ">
+                              <use xlink:href="./assets/icon/symbol/sprite.svg#calendar"></use>
+                            </svg>
+                          </div>
+                          <div class="calculator__math"> 
+                            <div class="calculator-math__btns"> 
+                              <button class="calculator-math__btn calculator-math-minus" type="button">
+                                <svg class="icon icon-math-m ">
+                                  <use xlink:href="./assets/icon/symbol/sprite.svg#math-m"></use>
+                                </svg>
+                              </button>
+                              <button class="calculator-math__btn calculator-math-plus" type="button">
+                                <svg class="icon icon-math-p ">
+                                  <use xlink:href="./assets/icon/symbol/sprite.svg#math-p"></use>
+                                </svg>
+                              </button>
+                            </div>
+                            <div class="calculator-math__label">Years</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="calculator-form__field"> 
+                        <div class="calculator-field__name">Closing costs</div>
+                        <div class="form-item"> 
+                          <input class="global-input calculator-input" type="text" name="Closing_costs" value="4,000">
+                          <div class="calculator-form__icon"> 
+                            <svg class="icon icon-dollar ">
+                              <use xlink:href="./assets/icon/symbol/sprite.svg#dollar"></use>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                  <div class="calculator-tab__graph">
+                    <div class="calculator-tab-graph__title global-title">Refinancing your mortgage could save you $- over 30 years and reduce your monthly payment by $121.50.</div>
+                    <div class="calculator-tab__statistic"> 
+                      <picture class="statistic__img__image">
+                        <source class="statistic__img__img" srcset="web/img/content/calculator/g2.webp" type="image/webp"/><img class="statistic__img__img" src="web/img/content/calculator/g2.png" alt="img"/>
+                      </picture>
+                    </div>
+                    <div class="calculator-tab__buttons"> 
+                      <div class="calculator-btn-graph-wrapp">
+                        <button class="calculator-graph__btn active" type="button"><span>Monthly Payment</span></button>
+                      </div>
+                      <div class="calculator-btn-graph-wrapp">
+                        <button class="calculator-graph__btn" type="button"><span>Total Payment</span></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="calculator-tab" data-tab="third">
+                  <form class="calculator-tab__form">
+                    <div class="calculator-fields__block">
+                      <div class="calculator-tab-form__title">Home Information</div>
+                      <div class="calculator-form__field"> 
+                        <div class="calculator-field__name">Loan amount</div>
+                        <div class="form-item"> 
+                          <input class="global-input calculator-input" type="text" name="loan_amount" value="250,000">
+                          <div class="calculator-form__icon"> 
+                            <svg class="icon icon-dollar ">
+                              <use xlink:href="./assets/icon/symbol/sprite.svg#dollar"></use>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="calculator-fields__block">
+                      <div class="calculator-tab-form__title">Loan Option1</div>
+                      <div class="calculator-form__field"> 
+                        <div class="calculator-field__name">Loan Term</div>
+                        <div class="form-item"> 
+                          <input class="global-input calculator-input" type="number" name="loan_term" value="15">
+                          <div class="calculator-form__icon"> 
+                            <svg class="icon icon-calendar ">
+                              <use xlink:href="./assets/icon/symbol/sprite.svg#calendar"></use>
+                            </svg>
+                          </div>
+                          <div class="calculator__math"> 
+                            <div class="calculator-math__btns"> 
+                              <button class="calculator-math__btn calculator-math-minus" type="button">
+                                <svg class="icon icon-math-m ">
+                                  <use xlink:href="./assets/icon/symbol/sprite.svg#math-m"></use>
+                                </svg>
+                              </button>
+                              <button class="calculator-math__btn calculator-math-plus" type="button">
+                                <svg class="icon icon-math-p ">
+                                  <use xlink:href="./assets/icon/symbol/sprite.svg#math-p"></use>
+                                </svg>
+                              </button>
+                            </div>
+                            <div class="calculator-math__label">Years</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="calculator-form__field"> 
+                        <div class="calculator-field__name">Interest Rate</div>
+                        <div class="form-item"> 
+                          <input class="global-input calculator-input" type="text" name="interest_rate" value="6">
+                          <div class="calculator-form__icon"> 
+                            <svg class="icon icon-percent ">
+                              <use xlink:href="./assets/icon/symbol/sprite.svg#percent"></use>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="calculator-fields__block">
+                      <div class="calculator-tab-form__title">Loan Option2</div>
+                      <div class="calculator-form__field"> 
+                        <div class="calculator-field__name">Loan Term</div>
+                        <div class="form-item"> 
+                          <input class="global-input calculator-input" type="number" name="loan_term" value="15">
+                          <div class="calculator-form__icon"> 
+                            <svg class="icon icon-calendar ">
+                              <use xlink:href="./assets/icon/symbol/sprite.svg#calendar"></use>
+                            </svg>
+                          </div>
+                          <div class="calculator__math"> 
+                            <div class="calculator-math__btns"> 
+                              <button class="calculator-math__btn calculator-math-minus" type="button">
+                                <svg class="icon icon-math-m ">
+                                  <use xlink:href="./assets/icon/symbol/sprite.svg#math-m"></use>
+                                </svg>
+                              </button>
+                              <button class="calculator-math__btn calculator-math-plus" type="button">
+                                <svg class="icon icon-math-p ">
+                                  <use xlink:href="./assets/icon/symbol/sprite.svg#math-p"></use>
+                                </svg>
+                              </button>
+                            </div>
+                            <div class="calculator-math__label">Years</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="calculator-form__field"> 
+                        <div class="calculator-field__name">Interest Rate</div>
+                        <div class="form-item"> 
+                          <input class="global-input calculator-input" type="text" name="interest_rate" value="15">
+                          <div class="calculator-form__icon"> 
+                            <svg class="icon icon-percent ">
+                              <use xlink:href="./assets/icon/symbol/sprite.svg#percent"></use>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="calculator-fields__block">
+                      <div class="calculator-tab-form__title">Assumptions</div>
+                      <div class="calculator-form__field"> 
+                        <div class="calculator-field__name">Property tax (montlhy)</div>
+                        <div class="form-item"> 
+                          <input class="global-input calculator-input" type="text" name="property_tax" value="2,500">
+                          <div class="calculator-form__icon"> 
+                            <svg class="icon icon-dollar ">
+                              <use xlink:href="./assets/icon/symbol/sprite.svg#dollar"></use>
+                            </svg>
+                          </div>
+                          <div class="calculator__label">1.00%</div>
+                        </div>
+                      </div>
+                      <div class="calculator-form__field"> 
+                        <div class="calculator-field__name">Homeowners insurance (monthly)</div>
+                        <div class="form-item"> 
+                          <input class="global-input calculator-input" type="text" name="homeowners_insurance" value="5,500">
+                          <div class="calculator-form__icon"> 
+                            <svg class="icon icon-dollar ">
+                              <use xlink:href="./assets/icon/symbol/sprite.svg#dollar"></use>
+                            </svg>
+                          </div>
+                          <div class="calculator__label">2.20%</div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                  <div class="calculator-tab__graph">
+                    <div class="calculator-tab-graph__title global-title">Loan Option 1 will be $1,521.98 lower than loan Loan Option 2.</div>
+                    <div class="calculator-tab__statistic"> 
+                      <picture class="statistic__img__image">
+                        <source class="statistic__img__img" srcset="web/img/content/calculator/g3.webp" type="image/webp"/><img class="statistic__img__img" src="web/img/content/calculator/g3.png" alt="img"/>
+                      </picture>
+                    </div>
+                    <div class="calculator-tab__buttons"> 
+                      <div class="calculator-btn-graph-wrapp">
+                        <button class="calculator-graph__btn active" type="button"><span>Remaining Balance</span></button>
+                      </div>
+                      <div class="calculator-btn-graph-wrapp">
+                        <button class="calculator-graph__btn" type="button"><span>Monthly Payment</span></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="calculator-tab" data-tab="fourth">
+                  <form class="calculator-tab__form">
+                    <div class="calculator-fields__block">
+                      <div class="calculator-tab-form__title">How much home can i afford?</div>
+                      <div class="calculator-form__field"> 
+                        <div class="calculator-field__name">Annual Income</div>
+                        <div class="form-item"> 
+                          <input class="global-input calculator-input" type="text" name="annual_income" value="70000">
+                          <div class="calculator-form__icon"> 
+                            <svg class="icon icon-dollar ">
+                              <use xlink:href="./assets/icon/symbol/sprite.svg#dollar"></use>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="calculator-form__field"> 
+                        <div class="calculator-field__name">Down payment</div>
+                        <div class="form-item"> 
+                          <input class="global-input calculator-input" type="text" name="down_payment" value="20000">
+                          <div class="calculator-form__icon"> 
+                            <svg class="icon icon-dollar ">
+                              <use xlink:href="./assets/icon/symbol/sprite.svg#dollar"></use>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="calculator-form__field"> 
+                        <div class="calculator-field__name">Monthly Debts</div>
+                        <div class="form-item"> 
+                          <input class="global-input calculator-input" type="text" name="monthly_debts" value="500">
+                          <div class="calculator-form__icon"> 
+                            <svg class="icon icon-calendar ">
+                              <use xlink:href="./assets/icon/symbol/sprite.svg#calendar"></use>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="calculator-form__field"> 
+                        <div class="calculator-field__name">Loan term</div>
+                        <div class="form-item"> 
+                          <input class="global-input calculator-input" type="number" name="loan_term" value="5">
+                          <div class="calculator-form__icon"> 
+                            <svg class="icon icon-calendar ">
+                              <use xlink:href="./assets/icon/symbol/sprite.svg#calendar"></use>
+                            </svg>
+                          </div>
+                          <div class="calculator__math"> 
+                            <div class="calculator-math__btns"> 
+                              <button class="calculator-math__btn calculator-math-minus" type="button">
+                                <svg class="icon icon-math-m ">
+                                  <use xlink:href="./assets/icon/symbol/sprite.svg#math-m"></use>
+                                </svg>
+                              </button>
+                              <button class="calculator-math__btn calculator-math-plus" type="button">
+                                <svg class="icon icon-math-p ">
+                                  <use xlink:href="./assets/icon/symbol/sprite.svg#math-p"></use>
+                                </svg>
+                              </button>
+                            </div>
+                            <div class="calculator-math__label">Years</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="calculator-form__field"> 
+                        <div class="calculator-field__name">Interest Rate</div>
+                        <div class="form-item"> 
+                          <input class="global-input calculator-input" type="text" name="interest_rate" value="6">
+                          <div class="calculator-form__icon"> 
+                            <svg class="icon icon-percent ">
+                              <use xlink:href="./assets/icon/symbol/sprite.svg#percent"></use>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="calculator-fields__block">
+                      <div class="calculator-tab-form__title">Advanced</div>
+                      <div class="calculator-form__field"> 
+                        <div class="calculator-field__name">Debt-to-income</div>
+                        <div class="form-item"> 
+                          <input class="global-input calculator-input" type="text" name="debt-to-income" value="36">
+                          <div class="calculator-form__icon"> 
+                            <svg class="icon icon-percent ">
+                              <use xlink:href="./assets/icon/symbol/sprite.svg#percent"></use>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="calculator-form__field"> 
+                        <div class="calculator-field__name">Home insurance (monthly)</div>
+                        <div class="form-item"> 
+                          <input class="global-input calculator-input" type="text" name="home_insurance" value="800">
+                          <div class="calculator-form__icon"> 
+                            <svg class="icon icon-dollar ">
+                              <use xlink:href="./assets/icon/symbol/sprite.svg#dollar"></use>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="calculator-form__field"> 
+                        <div class="calculator-field__name">Property tax (monthly)</div>
+                        <div class="form-item"> 
+                          <input class="global-input calculator-input" type="text" name="property_tax" value="1.2">
+                          <div class="calculator-form__icon"> 
+                            <svg class="icon icon-percent ">
+                              <use xlink:href="./assets/icon/symbol/sprite.svg#percent"></use>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="calculator-form__field"> 
+                        <div class="calculator-field__name">HOA dues (monthly)</div>
+                        <div class="form-item"> 
+                          <input class="global-input calculator-input" type="text" name="HOA_dues" value="0">
+                          <div class="calculator-form__icon"> 
+                            <svg class="icon icon-dollar ">
+                              <use xlink:href="./assets/icon/symbol/sprite.svg#dollar"></use>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                  <div class="calculator-tab__graph">
+                    <div class="calculator-tab-graph__title global-title title-center">You may be able to afford a home worth $101,089, with a monthly payment of $1,010.</div>
+                    <div class="calculator-tab__statistic"> 
+                      <picture class="statistic__img__image">
+                        <source class="statistic__img__img" srcset="web/img/content/calculator/g4.webp" type="image/webp"/><img class="statistic__img__img" src="web/img/content/calculator/g4.png" alt="img"/>
+                      </picture>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="footer footer__wrap" data-aos="fade-up" data-aos-delay="300"> 
+        <div class="global-container"> 
+          <div class="footer__top"> 
+            <div class="footer__media"> <a class="footer__logo" href="index.html"><img class="logo__img" src="./assets/svg/logo.svg" alt="logo"></a>
+              <div class="footer-media__info"> 
+                <p>NMLS: 1359704</p><br>
+                <p>1 Neshaminy Interplex Dr.</p>
+                <p>Suite 310</p>
+                <p>Trevose, PA 19053</p><br>
+                <p>844-242-6656</p>
+              </div>
+              <div class="footer__socials"> <a class="social__item" href="#">
+                  <svg class="icon icon-facebook ">
+                    <use xlink:href="./assets/icon/symbol/sprite.svg#facebook"></use>
+                  </svg></a><a class="social__item" href="#">
+                  <svg class="icon icon-instagram ">
+                    <use xlink:href="./assets/icon/symbol/sprite.svg#instagram"></use>
+                  </svg></a><a class="social__item" href="#">
+                  <svg class="icon icon-twitter ">
+                    <use xlink:href="./assets/icon/symbol/sprite.svg#twitter"></use>
+                  </svg></a><a class="social__item" href="#">
+                  <svg class="icon icon-yt ">
+                    <use xlink:href="./assets/icon/symbol/sprite.svg#yt"></use>
+                  </svg></a></div>
+            </div>
+            <div class="footer__information"> 
+              <div class="footer-info__column"> 
+                <div class="info-column__title">Product Portals</div>
+                <ul class="info-column__links"> 
+                  <li> <a class="footer__link" href="#">Mortgage</a></li>
+                  <li> <a class="footer__link" href="#">Refinance</a></li>
+                  <li> <a class="footer__link" href="#">Amres Wholesale</a></li>
+                  <li> <a class="footer__link" href="#">AmBridge</a></li>
+                </ul>
+              </div>
+              <div class="footer-info__column"> 
+                <div class="info-column__title">Resources</div>
+                <ul class="info-column__links"> 
+                  <li> <a class="footer__link" href="#">Loan Options</a></li>
+                  <li> <a class="footer__link" href="#">Careers</a></li>
+                  <li> <a class="footer__link" href="#">Contact Us</a></li>
+                </ul>
+              </div>
+              <div class="footer-info__column"> 
+                <div class="info-column__title">Legal</div>
+                <ul class="info-column__links"> 
+                  <li> <a class="footer__link" href="#">Privacy Policy</a></li>
+                  <li> <a class="footer__link" href="#">Fair Lending Policy</a></li>
+                  <li> <a class="footer__link" href="#">NMLS Consumer Access</a></li>
+                  <li> <a class="footer__link" href="#">Licensing Information</a></li>
+                  <li> <a class="footer__link" href="#">Reporting Mortgage Fraud</a></li>
+                  <li> <a class="footer__link" href="#">Texas Recovery Fund</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer__bottom"> 
+            <div class="footer__copy"> 
+              <p>© 2022 Amres Corporation NMLS: 1359704 |  For licensing information go to www.nmlsconsumeraccess.org | All rights reserved</p>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <div class="menu_wrap">
+      <ul class="menuGlobal">
+        <li class="menuGlobal__item"><a class="menuGlobal__link" href="about.html">1.about</a></li>
+        <li class="menuGlobal__item"><a class="menuGlobal__link" href="armes-corp.html">2.armes-corp</a></li>
+        <li class="menuGlobal__item"><a class="menuGlobal__link" href="blog-single.html">3.blog-single</a></li>
+        <li class="menuGlobal__item"><a class="menuGlobal__link" href="blog.html">4.blog</a></li>
+        <li class="menuGlobal__item"><a class="menuGlobal__link" href="calculator.html">5.calculator</a></li>
+        <li class="menuGlobal__item"><a class="menuGlobal__link" href="contact.html">6.contact</a></li>
+        <li class="menuGlobal__item"><a class="menuGlobal__link" href="index.html">7.index</a></li>
+        <li class="menuGlobal__item"><a class="menuGlobal__link" href="lending-policy.html">8.lending-policy</a></li>
+        <li class="menuGlobal__item"><a class="menuGlobal__link" href="loan-options.html">9.loan-options</a></li>
+        <li class="menuGlobal__item"><a class="menuGlobal__link" href="notice.html">10.notice</a></li>
+        <li class="menuGlobal__item"><a class="menuGlobal__link" href="privacy-policy.html">11.privacy-policy</a></li>
+      </ul>
+      <div class="menu_click">
+        <button>MENU</button>
+      </div>
+    </div>
+    <script>
+      // GLOBAL MENU ===================================================
+      document.querySelector('.menu_click') && document.querySelector('.menu_click').addEventListener('click', () => {
+        const menuWrap = document.querySelector('.menu_wrap')
+        menuWrap.classList.toggle('menu_wrap_active')
+      })
+      // END GLOBAL MENU ===================================================
+    </script>
+    <script src="./build/bundle.js"></script>
+    <style lang="scss">.menu_wrap {
+  position: fixed;
+  flex-direction: column;
+  z-index: 1000;
+  display: flex;
+  width: 200px;
+  transition: all .3s ease;
+  -webkit-transform: translateX(-202px);
+  transform: translateX(-202px);
+  background: #ffffff;
+  border-radius: 6px;
+  top: 10px;
+  box-shadow: 0 0 3px 3px rgba(54, 128, 251, 0.16);
+}
+
+.menuGlobal {
+  width: 100%;
+  padding: 20px;
+}
+
+.menu_click {
+  position: absolute;
+  top: 0;
+  left: calc(100% + 10px);
+  border-left: 2px solid transparent;
+  height: 30px;
+}
+
+.menu_click button {
+  padding: 3px 5px;
+}
+
+.menuGlobal__item {
+  margin-bottom: 17px;
+}
+.menuGlobal__item:last-child {
+  margin-bottom: 0;
+}
+
+.menuGlobal__link {
+  color: #707070;
+  font-size: 14px;
+  font-weight: 400;
+  transition: .3s;
+}
+.menuGlobal__link:hover {
+  color: #3680FB;
+}
+
+.menu_click, .menu_click button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu_wrap-title {
+  padding: 20px;
+  font-weight: 500;
+  font-size: 14px;
+  color: #3680FB;
+  border-bottom: 1px dashed #EAF0FA;
+}
+
+.menu_click button {
+  font-weight: 700;
+  line-height: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  color: #000;
+  border: 1px solid #BBCDEE;
+  outline: unset;
+  background: #F8FAFE;
+  border-radius: 6px;
+}
+
+.menu_click button .icon-drop {
+  width: 12px;
+  height: 7px;
+  fill: #BBCDEE;
+}
+
+.menu_wrap_active {
+  transition: all .3s ease;
+  -webkit-transform: translateX(2%);
+  transform: translateX(2%);
+}
+
+    </style>
+    <script src="assets/js/app.js?v=580"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="assets/js/main.js?v=331"></script>
+  </body>
+</html>
