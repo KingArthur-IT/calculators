@@ -3,35 +3,9 @@
     factory();
 })((function () { 'use strict';
 
-    const MONTHES = 12.;
+    const MONTHES$2 = 12.;
 
-    function caclMortgage(homePrice, downPayment, loanTerm, interestRate){
-        const i = 1. * interestRate / (100.0 * MONTHES),
-              n = loanTerm * MONTHES,
-              intermediateVal = Math.pow(i + 1, n);
-        return (homePrice - downPayment) * i * intermediateVal / (intermediateVal - 1)
-    }
-
-    function caclRefinance(balance, closingCosts, loanTerm, interestRate){
-        const i = 1. * interestRate / (100.0 * MONTHES),
-              n = loanTerm * MONTHES,
-              intermediateVal = Math.pow(i + 1, n);
-        return (1. * balance + 1. * closingCosts) * i * intermediateVal / (intermediateVal - 1)
-    }
-
-    function caclInterestAndPrincipal(loanAmount, loanTerm, interestRate){
-        const Amount = caclMortgage(loanAmount, 0.0, loanTerm, interestRate),
-              i = 1. * interestRate / (100.0 * MONTHES),
-              n = loanTerm * MONTHES;
-        console.log('amount', Amount, loanAmount, 0.0, loanAmount, interestRate);
-        const Principal = Amount / Math.pow(1 + i, n);
-        return {
-            principal: Principal,
-            interest: Amount - Principal 
-        }
-    }
-
-    const mortgageInputVals = {
+    var mortgageInputVals = {
         homePrice: 300000,
         downPayment: 60000,
         loanTerm: 30,
@@ -43,50 +17,12 @@
         insurance: 100,
         HOA: 100
     };
-    const refinanceInputVals = {
-        remainingBalance: 50000,
-        interestRateCurrent: 6,
-        interestRateNew: 3.3,
-        newLoanTerm: 30,
-        closingCosts: 4000
-    };
 
-    const refinanceOutputVals = {
-        currentPayment: 358,
-        newPayment: 0
-    };
-
-    const loanComparisonInputVals = {
-        loanAmount: 250000,
-        loanTermOption1: 15,
-        interestRateOpetion1: 5,
-        loanTermOption2: 15,
-        interestRateOpetion2: 15,
-    };
-
-    const loanComparisonOutputVals = {
-        interestOption1: 0,
-        interestOption2: 0,
-        principalOption1: 0,
-        principalOption2: 0,
-        tax: 0,
-        insurance: 0
-    };
-
-    class App {
-        start(){
-            getInitMortageValues();
-            onInputMortage();
-            console.log(mortageOutputVals);
-
-            getInitRefinanceValues();
-            onInputRefinance();
-            console.log(refinanceOutputVals);
-
-            getInitLoanComparisonValues();
-            onInputLoanComparison();
-            console.log(loanComparisonOutputVals);
-        }
+    function caclMortgage(homePrice, downPayment, loanTerm, interestRate){
+        const i = 1. * interestRate / (100.0 * MONTHES$2),
+              n = loanTerm * MONTHES$2,
+              intermediateVal = Math.pow(i + 1, n);
+        return (homePrice - downPayment) * i * intermediateVal / (intermediateVal - 1)
     }
 
     function getInitMortageValues(){
@@ -100,6 +36,7 @@
         mortageOutputVals.HOA = document.getElementsByName("HOA_dues")[0].value;
         mortageOutputVals.principalAndInterest = caclMortgage(mortgageInputVals.homePrice, mortgageInputVals.downPayment, mortgageInputVals.loanTerm, mortgageInputVals.interestRate);
     }
+
     function onInputMortage(){
         document.getElementsByName("home_price")[0].addEventListener('input', () => {
             mortgageInputVals.homePrice = document.getElementsByName("home_price")[0].value;
@@ -135,6 +72,32 @@
         });
     }
 
+    function getMortageOutputVals(){
+        return mortageOutputVals;
+    }
+
+    const MONTHES$1 = 12.;
+
+    var refinanceInputVals = {
+        remainingBalance: 50000,
+        interestRateCurrent: 6,
+        interestRateNew: 3.3,
+        newLoanTerm: 30,
+        closingCosts: 4000
+    };
+
+    var refinanceOutputVals = {
+        currentPayment: 358,
+        newPayment: 0
+    };
+
+    function caclRefinance(balance, closingCosts, loanTerm, interestRate){
+        const i = 1. * interestRate / (100.0 * MONTHES$1),
+              n = loanTerm * MONTHES$1,
+              intermediateVal = Math.pow(i + 1, n);
+        return (1. * balance + 1. * closingCosts) * i * intermediateVal / (intermediateVal - 1)
+    }
+
     function getInitRefinanceValues(){
         refinanceInputVals.remainingBalance = document.getElementsByName("remaining_balance")[0].value;
         refinanceInputVals.interestRateCurrent = document.getElementsByName("interest_rate_refinance_current")[0].value;
@@ -145,6 +108,7 @@
         refinanceOutputVals.currentPayment = document.getElementsByName("monthly_payment")[0].value;
         refinanceOutputVals.newPayment = caclRefinance(refinanceInputVals.remainingBalance, refinanceInputVals.closingCosts, refinanceInputVals.newLoanTerm, refinanceInputVals.interestRateNew);
     }
+
     function onInputRefinance(){
         document.getElementsByName("remaining_balance")[0].addEventListener('input', () => {
             refinanceInputVals.remainingBalance = document.getElementsByName("remaining_balance")[0].value;
@@ -177,6 +141,41 @@
         });
     }
 
+    function getRefinanceOutputVals(){
+        return refinanceOutputVals
+    }
+
+    const MONTHES = 12.;
+
+    var loanComparisonInputVals = {
+        loanAmount: 250000,
+        loanTermOption1: 15,
+        interestRateOpetion1: 5,
+        loanTermOption2: 15,
+        interestRateOpetion2: 15,
+    };
+
+    var loanComparisonOutputVals = {
+        interestOption1: 0,
+        interestOption2: 0,
+        principalOption1: 0,
+        principalOption2: 0,
+        tax: 0,
+        insurance: 0
+    };
+
+    function caclInterestAndPrincipal(loanAmount, loanTerm, interestRate){
+        const Amount = caclMortgage(loanAmount, 0.0, loanTerm, interestRate),
+              i = 1. * interestRate / (100.0 * MONTHES),
+              n = loanTerm * MONTHES;
+        console.log('amount', Amount, loanAmount, 0.0, loanAmount, interestRate);
+        const Principal = Amount / Math.pow(1 + i, n);
+        return {
+            principal: Principal,
+            interest: Amount - Principal 
+        }
+    }
+
     function getInitLoanComparisonValues(){
         loanComparisonInputVals.loanAmount = document.getElementsByName("loan_amount")[0].value;
         loanComparisonInputVals.loanTermOption1 = document.getElementsByName("loan_term_comparison_1")[0].value;
@@ -187,6 +186,7 @@
         loanComparisonOutputVals.tax = document.getElementsByName("property_tax_loan_comparison")[0].value;
         loanComparisonOutputVals.insurance = document.getElementsByName("homeowners_insurance")[0].value;
     }
+
     function onInputLoanComparison(){
         document.getElementsByName("loan_amount")[0].addEventListener('input', () => {
             loanComparisonInputVals.loanAmount = document.getElementsByName("loan_amount")[0].value;
@@ -236,6 +236,26 @@
             
             console.log(loanComparisonOutputVals);
         });
+    }
+
+    function getLoanComparisonOutputVals(){
+        return loanComparisonOutputVals
+    }
+
+    class App {
+        start(){
+            getInitMortageValues();
+            onInputMortage();
+            console.log(getMortageOutputVals());
+
+            getInitRefinanceValues();
+            onInputRefinance();
+            console.log(getRefinanceOutputVals());
+
+            getInitLoanComparisonValues();
+            onInputLoanComparison();
+            console.log(getLoanComparisonOutputVals());
+        }
     }
 
     const app = new App();
