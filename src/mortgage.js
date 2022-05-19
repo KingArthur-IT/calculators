@@ -1,3 +1,5 @@
+import ApexCharts from 'apexcharts';
+
 const MONTHES = 12.;
 
 var mortgageInputVals = {
@@ -30,6 +32,8 @@ export function getInitMortageValues(){
     mortageOutputVals.insurance = document.getElementsByName("home_insurance")[0].value;
     mortageOutputVals.HOA = document.getElementsByName("HOA_dues")[0].value;
     mortageOutputVals.principalAndInterest = caclMortgage(mortgageInputVals.homePrice, mortgageInputVals.downPayment, mortgageInputVals.loanTerm, mortgageInputVals.interestRate)
+
+    createMortageChart();
 }
 
 export function onInputMortage(){
@@ -69,4 +73,49 @@ export function onInputMortage(){
 
 export function getMortageOutputVals(){
     return mortageOutputVals;
+}
+
+var options = {
+    series: Object.values(mortageOutputVals),
+    labels: ['Principal & Interest', 'Taxes', 'Insurance', 'HOA'],
+    chart: {
+        type: 'donut',
+    },
+    responsive: [{
+        brakepoint: 2000,
+        options: {
+            chart: {
+                width: 600
+            },
+            legend: {
+                position: 'left'
+            }
+        }
+    }],
+    plotOptions: {
+        pie: {
+          donut: {
+            labels: {
+              show: true,
+              total: {
+                show: true,
+                label: 'Total',
+                formatter: () => getTotal()
+              }
+            }
+          }
+        }
+    }
+};
+
+function getTotal(){
+    let total = mortageOutputVals.HOA + mortageOutputVals.insurance + mortageOutputVals.principalAndInterest + mortageOutputVals.taxes;
+    return Number(total).toPrecision(6)
+}
+
+export function createMortageChart(){
+    const vals = Object.values(mortageOutputVals).map((i) => i * 1.)
+    options.series = vals
+    var chart = new ApexCharts(document.querySelector("#mortgage-chart"), options);
+    chart.render();
 }

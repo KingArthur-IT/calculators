@@ -194,11 +194,7 @@
                   </form>
                   <div class="calculator-tab__graph">
                     <div class="calculator-tab-graph__title global-title title-center">Estimated Monthly Payment</div>
-                    <div class="calculator-tab__statistic"> 
-                      <picture class="statistic__img__image">
-                        <source class="statistic__img__img" srcset="web/img/content/calculator/g1.webp" type="image/webp"/><img class="statistic__img__img" src="web/img/content/calculator/g1.png" alt="img"/>
-                      </picture>
-                    </div>
+                    <div id="mortgage-chart"></div>
                   </div>
                 </div>
                 <div class="calculator-tab" data-tab="second">
@@ -763,6 +759,10 @@
   transition: all .3s ease;
   -webkit-transform: translateX(2%);
   transform: translateX(2%);
+}
+
+#mortgage-chart{
+  height: 100vh;
 }
 
     </style>

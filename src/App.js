@@ -1,4 +1,4 @@
-import { getInitMortageValues, onInputMortage, getMortageOutputVals } from './mortgage.js'
+import { getInitMortageValues, onInputMortage, getMortageOutputVals, createMortageChart } from './mortgage.js'
 import { getInitRefinanceValues, onInputRefinance, getRefinanceOutputVals } from './refinance.js'
 import { getInitLoanComparisonValues, onInputLoanComparison, getLoanComparisonOutputVals } from './loanComparison.js'
 
