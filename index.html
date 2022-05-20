@@ -309,7 +309,7 @@
                       <div class="calculator-form__field"> 
                         <div class="calculator-field__name">Loan amount</div>
                         <div class="form-item"> 
-                          <input class="global-input calculator-input" type="text" name="loan_amount" value="250000">
+                          <input class="global-input calculator-input" type="text" name="loan_amount" value="250000" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                           <div class="calculator-form__icon"> 
                             <svg class="icon icon-dollar ">
                               <use xlink:href="./assets/icon/symbol/sprite.svg#dollar"></use>
@@ -323,7 +323,7 @@
                       <div class="calculator-form__field"> 
                         <div class="calculator-field__name">Loan Term</div>
                         <div class="form-item"> 
-                          <input class="global-input calculator-input" type="number" name="loan_term_comparison_1" value="15">
+                          <input class="global-input calculator-input" type="number" name="loan_term_comparison_1" value="15" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                           <div class="calculator-form__icon"> 
                             <svg class="icon icon-calendar ">
                               <use xlink:href="./assets/icon/symbol/sprite.svg#calendar"></use>
@@ -331,12 +331,12 @@
                           </div>
                           <div class="calculator__math"> 
                             <div class="calculator-math__btns"> 
-                              <button class="calculator-math__btn calculator-math-minus" type="button">
+                              <button class="calculator-math__btn calculator-math-minus" type="button" name="loan-option1-comparison-minus">
                                 <svg class="icon icon-math-m ">
                                   <use xlink:href="./assets/icon/symbol/sprite.svg#math-m"></use>
                                 </svg>
                               </button>
-                              <button class="calculator-math__btn calculator-math-plus" type="button">
+                              <button class="calculator-math__btn calculator-math-plus" type="button" name="loan-option1-comparison-plus">
                                 <svg class="icon icon-math-p ">
                                   <use xlink:href="./assets/icon/symbol/sprite.svg#math-p"></use>
                                 </svg>
@@ -349,7 +349,7 @@
                       <div class="calculator-form__field"> 
                         <div class="calculator-field__name">Interest Rate</div>
                         <div class="form-item"> 
-                          <input class="global-input calculator-input" type="text" name="interest_rate_comparison_1" value="6">
+                          <input class="global-input calculator-input" type="text" name="interest_rate_comparison_1" value="6" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                           <div class="calculator-form__icon"> 
                             <svg class="icon icon-percent ">
                               <use xlink:href="./assets/icon/symbol/sprite.svg#percent"></use>
@@ -363,7 +363,7 @@
                       <div class="calculator-form__field"> 
                         <div class="calculator-field__name">Loan Term</div>
                         <div class="form-item"> 
-                          <input class="global-input calculator-input" type="number" name="loan_term_comparison_2" value="15">
+                          <input class="global-input calculator-input" type="number" name="loan_term_comparison_2" value="15" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                           <div class="calculator-form__icon"> 
                             <svg class="icon icon-calendar ">
                               <use xlink:href="./assets/icon/symbol/sprite.svg#calendar"></use>
@@ -371,12 +371,12 @@
                           </div>
                           <div class="calculator__math"> 
                             <div class="calculator-math__btns"> 
-                              <button class="calculator-math__btn calculator-math-minus" type="button">
+                              <button class="calculator-math__btn calculator-math-minus" type="button" name="loan-option2-comparison-minus">
                                 <svg class="icon icon-math-m ">
                                   <use xlink:href="./assets/icon/symbol/sprite.svg#math-m"></use>
                                 </svg>
                               </button>
-                              <button class="calculator-math__btn calculator-math-plus" type="button">
+                              <button class="calculator-math__btn calculator-math-plus" type="button" name="loan-option2-comparison-plus">
                                 <svg class="icon icon-math-p ">
                                   <use xlink:href="./assets/icon/symbol/sprite.svg#math-p"></use>
                                 </svg>
@@ -389,7 +389,7 @@
                       <div class="calculator-form__field"> 
                         <div class="calculator-field__name">Interest Rate</div>
                         <div class="form-item"> 
-                          <input class="global-input calculator-input" type="text" name="interest_rate_comparison_2" value="15">
+                          <input class="global-input calculator-input" type="text" name="interest_rate_comparison_2" value="15" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                           <div class="calculator-form__icon"> 
                             <svg class="icon icon-percent ">
                               <use xlink:href="./assets/icon/symbol/sprite.svg#percent"></use>
@@ -403,40 +403,40 @@
                       <div class="calculator-form__field"> 
                         <div class="calculator-field__name">Property tax (montlhy)</div>
                         <div class="form-item"> 
-                          <input class="global-input calculator-input" type="text" name="property_tax_loan_comparison" value="2500">
+                          <input class="global-input calculator-input" type="text" name="property_tax_loan_comparison" value="2500" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                           <div class="calculator-form__icon"> 
                             <svg class="icon icon-dollar ">
                               <use xlink:href="./assets/icon/symbol/sprite.svg#dollar"></use>
                             </svg>
                           </div>
-                          <div class="calculator__label">1.00%</div>
+                          <div class="calculator__label" name="comparison-tax-percent">1.00%</div>
                         </div>
                       </div>
                       <div class="calculator-form__field"> 
                         <div class="calculator-field__name">Homeowners insurance (monthly)</div>
                         <div class="form-item"> 
-                          <input class="global-input calculator-input" type="text" name="homeowners_insurance" value="5500">
+                          <input class="global-input calculator-input" type="text" name="homeowners_insurance_loan_comparison" value="5500" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                           <div class="calculator-form__icon"> 
                             <svg class="icon icon-dollar ">
                               <use xlink:href="./assets/icon/symbol/sprite.svg#dollar"></use>
                             </svg>
                           </div>
-                          <div class="calculator__label">2.20%</div>
+                          <div class="calculator__label" name="comparison-insurance-percent">2.20%</div>
                         </div>
                       </div>
                     </div>
                   </form>
                   <div class="calculator-tab__graph">
-                    <div class="calculator-tab-graph__title global-title">Loan Option 1 will be $1,521.98 lower than loan Loan Option 2.</div>
+                    <div class="calculator-tab-graph__title global-title">Loan Option 1 will be $<span name="comparison-title-value">1,521.98</span> <span name="comparison-title-sign">lower</span> than loan Loan Option 2.</div>
                     <div class="calculator-tab__statistic"> 
                       <div id="comparison-chart"></div>
                     </div>
                     <div class="calculator-tab__buttons"> 
                       <div class="calculator-btn-graph-wrapp">
-                        <button class="calculator-graph__btn active" type="button"><span>Remaining Balance</span></button>
+                        <button class="calculator-graph__btn active" type="button" name="comparison-btn-balance"><span>Remaining Balance</span></button>
                       </div>
                       <div class="calculator-btn-graph-wrapp">
-                        <button class="calculator-graph__btn" type="button"><span>Monthly Payment</span></button>
+                        <button class="calculator-graph__btn" type="button" name="comparison-btn-monthly"><span>Monthly Payment</span></button>
                       </div>
                     </div>
                   </div>

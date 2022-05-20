@@ -6,15 +6,12 @@ class App {
     start(){
         getInitMortageValues();
         onInputMortage();
-        console.log(getMortageOutputVals())
 
         getInitRefinanceValues();
         onInputRefinance();
-        console.log(getRefinanceOutputVals());
 
         getInitLoanComparisonValues();
         onInputLoanComparison();
-        console.log(getLoanComparisonOutputVals());
     }
 }
 
