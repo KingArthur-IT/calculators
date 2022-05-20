@@ -448,7 +448,7 @@
                       <div class="calculator-form__field"> 
                         <div class="calculator-field__name">Annual Income</div>
                         <div class="form-item"> 
-                          <input class="global-input calculator-input" type="text" name="annual_income" value="70000">
+                          <input class="global-input calculator-input" type="text" name="home_annual_income" value="70000">
                           <div class="calculator-form__icon"> 
                             <svg class="icon icon-dollar ">
                               <use xlink:href="./assets/icon/symbol/sprite.svg#dollar"></use>
@@ -459,7 +459,7 @@
                       <div class="calculator-form__field"> 
                         <div class="calculator-field__name">Down payment</div>
                         <div class="form-item"> 
-                          <input class="global-input calculator-input" type="text" name="down_payment" value="20000">
+                          <input class="global-input calculator-input" type="text" name="home_down_payment" value="20000">
                           <div class="calculator-form__icon"> 
                             <svg class="icon icon-dollar ">
                               <use xlink:href="./assets/icon/symbol/sprite.svg#dollar"></use>
@@ -470,7 +470,7 @@
                       <div class="calculator-form__field"> 
                         <div class="calculator-field__name">Monthly Debts</div>
                         <div class="form-item"> 
-                          <input class="global-input calculator-input" type="text" name="monthly_debts" value="500">
+                          <input class="global-input calculator-input" type="text" name="home_monthly_debts" value="500">
                           <div class="calculator-form__icon"> 
                             <svg class="icon icon-calendar ">
                               <use xlink:href="./assets/icon/symbol/sprite.svg#calendar"></use>
@@ -481,7 +481,7 @@
                       <div class="calculator-form__field"> 
                         <div class="calculator-field__name">Loan term</div>
                         <div class="form-item"> 
-                          <input class="global-input calculator-input" type="number" name="loan_term" value="5">
+                          <input class="global-input calculator-input" type="number" name="home_loan_term" value="5">
                           <div class="calculator-form__icon"> 
                             <svg class="icon icon-calendar ">
                               <use xlink:href="./assets/icon/symbol/sprite.svg#calendar"></use>
@@ -489,12 +489,12 @@
                           </div>
                           <div class="calculator__math"> 
                             <div class="calculator-math__btns"> 
-                              <button class="calculator-math__btn calculator-math-minus" type="button">
+                              <button class="calculator-math__btn calculator-math-minus" type="button" name="home-loan-term-minus">
                                 <svg class="icon icon-math-m ">
                                   <use xlink:href="./assets/icon/symbol/sprite.svg#math-m"></use>
                                 </svg>
                               </button>
-                              <button class="calculator-math__btn calculator-math-plus" type="button">
+                              <button class="calculator-math__btn calculator-math-plus" type="button" name="home-loan-term-plus">
                                 <svg class="icon icon-math-p ">
                                   <use xlink:href="./assets/icon/symbol/sprite.svg#math-p"></use>
                                 </svg>
@@ -507,7 +507,7 @@
                       <div class="calculator-form__field"> 
                         <div class="calculator-field__name">Interest Rate</div>
                         <div class="form-item"> 
-                          <input class="global-input calculator-input" type="text" name="interest_rate" value="6">
+                          <input class="global-input calculator-input" type="text" name="home_interest_rate" value="6">
                           <div class="calculator-form__icon"> 
                             <svg class="icon icon-percent ">
                               <use xlink:href="./assets/icon/symbol/sprite.svg#percent"></use>
@@ -521,7 +521,7 @@
                       <div class="calculator-form__field"> 
                         <div class="calculator-field__name">Debt-to-income</div>
                         <div class="form-item"> 
-                          <input class="global-input calculator-input" type="text" name="debt-to-income" value="36">
+                          <input class="global-input calculator-input" type="text" name="home-debt-to-income" value="36">
                           <div class="calculator-form__icon"> 
                             <svg class="icon icon-percent ">
                               <use xlink:href="./assets/icon/symbol/sprite.svg#percent"></use>
@@ -543,7 +543,7 @@
                       <div class="calculator-form__field"> 
                         <div class="calculator-field__name">Property tax (monthly)</div>
                         <div class="form-item"> 
-                          <input class="global-input calculator-input" type="text" name="property_tax" value="1.2">
+                          <input class="global-input calculator-input" type="text" name="home_property_tax" value="1.2">
                           <div class="calculator-form__icon"> 
                             <svg class="icon icon-percent ">
                               <use xlink:href="./assets/icon/symbol/sprite.svg#percent"></use>
@@ -554,7 +554,7 @@
                       <div class="calculator-form__field"> 
                         <div class="calculator-field__name">HOA dues (monthly)</div>
                         <div class="form-item"> 
-                          <input class="global-input calculator-input" type="text" name="HOA_dues" value="0">
+                          <input class="global-input calculator-input" type="text" name="home_HOA_dues" value="0">
                           <div class="calculator-form__icon"> 
                             <svg class="icon icon-dollar ">
                               <use xlink:href="./assets/icon/symbol/sprite.svg#dollar"></use>
@@ -567,9 +567,7 @@
                   <div class="calculator-tab__graph">
                     <div class="calculator-tab-graph__title global-title title-center">You may be able to afford a home worth $101,089, with a monthly payment of $1,010.</div>
                     <div class="calculator-tab__statistic"> 
-                      <picture class="statistic__img__image">
-                        <source class="statistic__img__img" srcset="web/img/content/calculator/g4.webp" type="image/webp"/><img class="statistic__img__img" src="web/img/content/calculator/g4.png" alt="img"/>
-                      </picture>
+                      <div id="home-afford-chart"></div>
                     </div>
                   </div>
                 </div>

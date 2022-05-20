@@ -1,7 +1,7 @@
-import { getInitMortageValues, onInputMortage, getMortageOutputVals } from './mortgage.js'
-import { getInitRefinanceValues, onInputRefinance, getRefinanceOutputVals } from './refinance.js'
-import { getInitLoanComparisonValues, onInputLoanComparison, getLoanComparisonOutputVals } from './loanComparison.js'
-
+import { getInitMortageValues, onInputMortage } from './mortgage.js'
+import { getInitRefinanceValues, onInputRefinance } from './refinance.js'
+import { getInitLoanComparisonValues, onInputLoanComparison } from './loanComparison.js'
+import { getInitHomeAfforfdValues, onInputHomeAfford} from './homeAfford.js'
 class App {
     start(){
         getInitMortageValues();
@@ -12,6 +12,9 @@ class App {
 
         getInitLoanComparisonValues();
         onInputLoanComparison();
+
+        getInitHomeAfforfdValues();
+        onInputHomeAfford();
     }
 }
 

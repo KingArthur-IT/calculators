@@ -122,7 +122,7 @@
         });
     }
 
-    var options$2 = {
+    var options$3 = {
         series: Object.values(mortageOutputVals),
         labels: ['Principal & Interest', 'Taxes', 'Insurance', 'HOA'],
         chart: {
@@ -150,7 +150,7 @@
                     label: 'Total',
                     fontFamily: 'Riviera Nights',
                     formatter: function () {
-                        return '$ ' + getTotal()
+                        return '$ ' + getTotal$1()
                     }
                   },
                   value: {
@@ -204,22 +204,22 @@
         }
     };
 
-    function getTotal(){
+    function getTotal$1(){
         let total = 1. * mortageOutputVals.HOA + 1. * mortageOutputVals.insurance + 1. * mortageOutputVals.principalAndInterest + 1. * mortageOutputVals.taxes;
         return Number(total).toFixed(2)
     }
 
     function createMortageChart(){
         const vals = Object.values(mortageOutputVals).map((i) => i * 1.);
-        options$2.series = vals;
-        mortgageChart = new ApexCharts$1(mortgageElement, options$2);
+        options$3.series = vals;
+        mortgageChart = new ApexCharts$1(mortgageElement, options$3);
         mortgageChart.render();
     }
 
     function updateMortageChart(){
-        const vals = Object.values(mortageOutputVals).map((i) => i * 1.);
-        options$2.series = vals;
-        mortgageChart.updateOptions(options$2, true, true, true);
+        mortgageChart.destroy();
+        createMortageChart();
+
     }
 
     const MONTHES$1 = 12.;
@@ -305,7 +305,7 @@
     }
 
 
-    var options$1 = {
+    var options$2 = {
         animations: {
             enabled: true,
             easing: 'easeinout',
@@ -366,18 +366,18 @@
 
     function createRefinanceChart(){
         const vals = Object.values(refinanceOutputVals).map((i) => i * 1.);
-        options$1.series[0].data = vals;
-        refinanceChart = new ApexCharts$1(refinanceElement, options$1);
+        options$2.series[0].data = vals;
+        refinanceChart = new ApexCharts$1(refinanceElement, options$2);
         refinanceChart.render();
     }
 
     function updateRefinanceChart(seriesName = 'Monthly'){
         const vals = Object.values(refinanceOutputVals).map((i) => i * 1.);
-        options$1.series[0].data = vals;
-        options$1.series[0].name = seriesName;
+        options$2.series[0].data = vals;
+        options$2.series[0].name = seriesName;
 
         refinanceChart.destroy();
-        refinanceChart = new ApexCharts$1(refinanceElement, options$1);
+        refinanceChart = new ApexCharts$1(refinanceElement, options$2);
         refinanceChart.render();
 
         const newVal = isFinite(refinanceOutputVals.newPayment) ? refinanceOutputVals.newPayment : refinanceOutputVals.currentPayment;
@@ -519,7 +519,7 @@
         });
     }
 
-    var options = {
+    var options$1 = {
         series: [
             {
                 name: 'Incurance',
@@ -631,11 +631,11 @@
     };
 
     function createComparisonChart(){
-        options.series[0].data = [loanComparisonOutputVals.insurance, loanComparisonOutputVals.insurance];
-        options.series[1].data = [loanComparisonOutputVals.tax, loanComparisonOutputVals.tax];
-        options.series[2].data = [loanComparisonOutputVals.interestOption1, loanComparisonOutputVals.interestOption2];
-        options.series[3].data = [loanComparisonOutputVals.principalOption1, loanComparisonOutputVals.principalOption2];
-        comparisonChart = new ApexCharts$1(comparisonElement, options);
+        options$1.series[0].data = [loanComparisonOutputVals.insurance, loanComparisonOutputVals.insurance];
+        options$1.series[1].data = [loanComparisonOutputVals.tax, loanComparisonOutputVals.tax];
+        options$1.series[2].data = [loanComparisonOutputVals.interestOption1, loanComparisonOutputVals.interestOption2];
+        options$1.series[3].data = [loanComparisonOutputVals.principalOption1, loanComparisonOutputVals.principalOption2];
+        comparisonChart = new ApexCharts$1(comparisonElement, options$1);
         comparisonChart.render();
     }
 
@@ -659,6 +659,162 @@
         loanComparisonOutputVals.principalOption2 = option2.principal;
     }
 
+    const homeAffordElement = document.querySelector("#home-afford-chart");
+    var homeAffordChart;
+
+    var homeAffordOutputVals = {
+        PAndI: 0,
+        taxes: 100,
+        insurance: 100
+    };
+
+    function getInitHomeAfforfdValues(){
+        createHomeAffordChart();
+    }
+
+    function onInputHomeAfford(){
+        document.getElementsByName("home_annual_income")[0].addEventListener('input', () => {
+            updateHomeAffordChart();
+        });
+        document.getElementsByName("home_down_payment")[0].addEventListener('input', () => {
+            updateHomeAffordChart();
+        });
+        document.getElementsByName("home_monthly_debts")[0].addEventListener('input', () => {
+            updateHomeAffordChart();
+        });
+        document.getElementsByName("home_loan_term")[0].addEventListener('input', () => {
+            updateHomeAffordChart();
+        });
+        document.getElementsByName("home-loan-term-minus")[0].addEventListener('click', () => {
+            updateHomeAffordChart();
+        });
+        document.getElementsByName("home-loan-term-plus")[0].addEventListener('click', () => {
+            updateHomeAffordChart();
+        });
+        document.getElementsByName("home_interest_rate")[0].addEventListener('input', () => {
+            updateHomeAffordChart();
+        });
+        document.getElementsByName("home-debt-to-income")[0].addEventListener('input', () => {
+            updateHomeAffordChart();
+        });
+        document.getElementsByName("home_insurance")[0].addEventListener('input', () => {
+            updateHomeAffordChart();
+        });
+        document.getElementsByName("home_property_tax")[0].addEventListener('input', () => {
+            updateHomeAffordChart();
+        });
+        document.getElementsByName("home_HOA_dues")[0].addEventListener('input', () => {
+            updateHomeAffordChart();
+        });
+    }
+
+    var options = {
+        series: Object.values(homeAffordOutputVals),
+        labels: ['P&I', 'Taxes', 'Insurance'],
+        chart: {
+            type: 'donut',
+            width: 600,
+        },
+        responsive: [{
+            brakepoint: 2000,
+            options: {
+                chart: {
+                    width: 600
+                },
+                legend: {
+                    position: 'left'
+                }
+            }
+        }],
+        plotOptions: {
+            pie: {
+              donut: {
+                labels: {
+                  show: true,
+                  total: {
+                    show: true,
+                    color: '#ffffff',
+                    label: 'Total',
+                    fontFamily: 'Riviera Nights',
+                    formatter: function () {
+                        return '$ ' + getTotal()
+                    }
+                  },
+                  value: {
+                    show: true,
+                    fontSize: '16px',
+                    fontFamily: 'Riviera Nights',
+                    fontWeight: 400,
+                    color: '#ffffff',
+                    formatter: function (val) {
+                      return '$ ' + val
+                    }
+                  },
+                },
+              }
+            }
+        },
+        legend:{
+            position: 'left',
+            fontFamily: 'Riviera Nights',
+            fontSize: 16,
+            horizontalAlign: 'center', 
+            offsetX: 0,
+            offsetY: 20,
+            labels: {
+                colors: '#ffffff'
+            },
+            markers: {
+                width: 16,
+                height: 16,
+                radius: 16,
+                offsetX: -10,
+                offsetY: 2
+            },
+            itemMargin: {
+                horizontal: 0,
+                vertical: 10
+            },
+        },
+        tooltip: {
+            y: {
+                formatter: function(value) {
+                  return '$' + value
+                }
+              }
+        },
+        stroke: {
+            show: true,
+            curve: 'smooth',
+            colors: '#000000',
+            width: 2,    
+        }
+    };
+
+    function getTotal(){
+        let total = 1. * homeAffordOutputVals.insurance + 1. * homeAffordOutputVals.PAndI + 1. * homeAffordOutputVals.taxes;
+        return Number(total).toFixed(2)
+    }
+
+    function createHomeAffordChart(){
+        let vals = [];
+        homeAffordOutputVals.PAndI = Math.random() * 5000 + 5000;
+        vals.push(homeAffordOutputVals.PAndI);
+        homeAffordOutputVals.taxes = Math.random() * 5000 + 5000;
+        vals.push(homeAffordOutputVals.taxes);
+        homeAffordOutputVals.insurance = Math.random() * 5000 + 5000;
+        vals.push(homeAffordOutputVals.insurance);
+        
+        options.series = vals;
+        homeAffordChart = new ApexCharts$1(homeAffordElement, options);
+        homeAffordChart.render();
+    }
+
+    function updateHomeAffordChart(){
+        homeAffordChart.destroy();
+        createHomeAffordChart();
+    }
+
     class App {
         start(){
             getInitMortageValues();
@@ -669,6 +825,9 @@
 
             getInitLoanComparisonValues();
             onInputLoanComparison();
+
+            getInitHomeAfforfdValues();
+            onInputHomeAfford();
         }
     }
 

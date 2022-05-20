@@ -196,7 +196,7 @@ function createMortageChart(){
 }
 
 function updateMortageChart(){
-    const vals = Object.values(mortageOutputVals).map((i) => i * 1.)
-    options.series = vals
-    mortgageChart.updateOptions(options, true, true, true)
+    mortgageChart.destroy();
+    createMortageChart();
+
 }
