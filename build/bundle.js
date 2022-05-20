@@ -68,40 +68,57 @@
             mortgageInputVals.homePrice = document.getElementsByName("home_price")[0].value;
             mortageOutputVals.principalAndInterest = caclMortgage(mortgageInputVals.homePrice, mortgageInputVals.downPayment, mortgageInputVals.loanTerm, mortgageInputVals.interestRate).toFixed(2);
             updateMortageChart();
-            console.log(mortageOutputVals);
+            if (mortgageInputVals.homePrice > 0){
+                document.getElementsByName("mortgage_down_payment_percent")[0].innerHTML = (100. * mortgageInputVals.downPayment / mortgageInputVals.homePrice).toFixed(2) + '%';
+                document.getElementsByName("mortgage_tax_percent")[0].innerHTML = (100. * mortageOutputVals.taxes / mortgageInputVals.homePrice).toFixed(2) + '%';
+            }
+            else {
+                document.getElementsByName("mortgage_down_payment_percent")[0].innerHTML = '100%';
+                document.getElementsByName("mortgage_tax_percent")[0].innerHTML = '100%';
+            }
         });
         document.getElementsByName("down_payment")[0].addEventListener('input', () => {
             mortgageInputVals.downPayment = document.getElementsByName("down_payment")[0].value;
             mortageOutputVals.principalAndInterest = caclMortgage(mortgageInputVals.homePrice, mortgageInputVals.downPayment, mortgageInputVals.loanTerm, mortgageInputVals.interestRate).toFixed(2);
             updateMortageChart();
-            console.log(mortageOutputVals);
+            if (mortgageInputVals.homePrice > 0)
+                document.getElementsByName("mortgage_down_payment_percent")[0].innerHTML = (100. * mortgageInputVals.downPayment / mortgageInputVals.homePrice).toFixed(2) + '%';
+            else document.getElementsByName("mortgage_down_payment_percent")[0].innerHTML = '100%';
         });
         document.getElementsByName("loan_term")[0].addEventListener('input', () => {
             mortgageInputVals.loanTerm = document.getElementsByName("loan_term")[0].value;
             mortageOutputVals.principalAndInterest = caclMortgage(mortgageInputVals.homePrice, mortgageInputVals.downPayment, mortgageInputVals.loanTerm, mortgageInputVals.interestRate).toFixed(2);
             updateMortageChart();
-            console.log(mortageOutputVals);
         });
-        document.getElementsByName("interest_rate")[0].addEventListener('input', () => {
-            mortgageInputVals.interestRate = document.getElementsByName("interest_rate")[0].value;
+        document.getElementsByName("mortgage_year_minus")[0].addEventListener('click', () => {
+            mortgageInputVals.loanTerm = document.getElementsByName("loan_term")[0].value;
             mortageOutputVals.principalAndInterest = caclMortgage(mortgageInputVals.homePrice, mortgageInputVals.downPayment, mortgageInputVals.loanTerm, mortgageInputVals.interestRate).toFixed(2);
             updateMortageChart();
-            console.log(mortageOutputVals);
+        });
+        document.getElementsByName("mortgage_year_plus")[0].addEventListener('click', () => {
+            mortgageInputVals.loanTerm = document.getElementsByName("loan_term")[0].value;
+            mortageOutputVals.principalAndInterest = caclMortgage(mortgageInputVals.homePrice, mortgageInputVals.downPayment, mortgageInputVals.loanTerm, mortgageInputVals.interestRate).toFixed(2);
+            updateMortageChart();
+        });
+        document.getElementsByName("interest_rate_mortgage")[0].addEventListener('input', () => {
+            mortgageInputVals.interestRate = document.getElementsByName("interest_rate_mortgage")[0].value;
+            mortageOutputVals.principalAndInterest = caclMortgage(mortgageInputVals.homePrice, mortgageInputVals.downPayment, mortgageInputVals.loanTerm, mortgageInputVals.interestRate).toFixed(2);
+            updateMortageChart();
         });
         document.getElementsByName("property_tax")[0].addEventListener('input', () => {
             mortageOutputVals.taxes = document.getElementsByName("property_tax")[0].value;
             updateMortageChart();
-            console.log(mortageOutputVals);
+            if (mortgageInputVals.homePrice > 0)
+                document.getElementsByName("mortgage_tax_percent")[0].innerHTML = (100. * mortageOutputVals.taxes / mortgageInputVals.homePrice).toFixed(2) + '%';
+            else document.getElementsByName("mortgage_tax_percent")[0].innerHTML = '100%';
         });
         document.getElementsByName("home_insurance")[0].addEventListener('input', () => {
             mortageOutputVals.insurance = document.getElementsByName("home_insurance")[0].value;
             updateMortageChart();
-            console.log(mortageOutputVals);
         });
         document.getElementsByName("HOA_dues")[0].addEventListener('input', () => {
             mortageOutputVals.HOA = document.getElementsByName("HOA_dues")[0].value;
             updateMortageChart();
-            console.log(mortageOutputVals);
         });
     }
 
@@ -133,12 +150,24 @@
                   show: true,
                   total: {
                     show: true,
-                    label: 'Total',
-                    formatter: () => '$ ' + getTotal(),
                     color: '#ffffff',
-                    fontFamily: 'Riviera Nights'
-                  }
-                }
+                    label: 'Total',
+                    fontFamily: 'Riviera Nights',
+                    formatter: function () {
+                        return '$ ' + getTotal()
+                    }
+                  },
+                  value: {
+                    show: true,
+                    fontSize: '16px',
+                    fontFamily: 'Riviera Nights',
+                    fontWeight: 400,
+                    color: '#ffffff',
+                    formatter: function (val) {
+                      return '$ ' + val
+                    }
+                  },
+                },
               }
             }
         },
@@ -146,7 +175,36 @@
             position: 'left',
             fontFamily: 'Riviera Nights',
             fontSize: 16,
-            color: '#ffffff',
+            horizontalAlign: 'center', 
+            offsetX: 0,
+            offsetY: 20,
+            labels: {
+                colors: '#ffffff'
+            },
+            markers: {
+                width: 16,
+                height: 16,
+                radius: 16,
+                offsetX: -10,
+                offsetY: 2
+            },
+            itemMargin: {
+                horizontal: 0,
+                vertical: 10
+            },
+        },
+        tooltip: {
+            y: {
+                formatter: function(value) {
+                  return '$' + value
+                }
+              }
+        },
+        stroke: {
+            show: true,
+            curve: 'smooth',
+            colors: '#000000',
+            width: 2,    
         }
     };
 
@@ -165,7 +223,7 @@
     function updateMortageChart(){
         const vals = Object.values(mortageOutputVals).map((i) => i * 1.);
         options$2.series = vals;
-        mortgageChart.updateOptions(options$2, false, true, true);
+        mortgageChart.updateOptions(options$2, true, true, true);
     }
 
     const MONTHES$1 = 12.;

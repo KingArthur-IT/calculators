@@ -96,7 +96,7 @@
                       <div class="calculator-form__field"> 
                         <div class="calculator-field__name">Home price</div>
                         <div class="form-item"> 
-                          <input class="global-input calculator-input" type="text" name="home_price" value="300000">
+                          <input class="global-input calculator-input" type="text" name="home_price" value="300000" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                           <div class="calculator-form__icon"> 
                             <svg class="icon icon-dollar ">
                               <use xlink:href="./assets/icon/symbol/sprite.svg#dollar"></use>
@@ -107,19 +107,19 @@
                       <div class="calculator-form__field"> 
                         <div class="calculator-field__name">Down payment</div>
                         <div class="form-item"> 
-                          <input class="global-input calculator-input" type="text" name="down_payment" value="60000">
+                          <input class="global-input calculator-input" type="text" name="down_payment" value="60000" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                           <div class="calculator-form__icon"> 
                             <svg class="icon icon-dollar ">
                               <use xlink:href="./assets/icon/symbol/sprite.svg#dollar"></use>
                             </svg>
                           </div>
-                          <div class="calculator__label">20.00%</div>
+                          <div class="calculator__label" name="mortgage_down_payment_percent">20.00%</div>
                         </div>
                       </div>
                       <div class="calculator-form__field"> 
                         <div class="calculator-field__name">Loan term</div>
                         <div class="form-item"> 
-                          <input class="global-input calculator-input" type="number" name="loan_term" value="30">
+                          <input class="global-input calculator-input" type="number" name="loan_term" value="30" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                           <div class="calculator-form__icon"> 
                             <svg class="icon icon-calendar ">
                               <use xlink:href="./assets/icon/symbol/sprite.svg#calendar"></use>
@@ -127,12 +127,12 @@
                           </div>
                           <div class="calculator__math"> 
                             <div class="calculator-math__btns"> 
-                              <button class="calculator-math__btn calculator-math-minus" type="button">
+                              <button class="calculator-math__btn calculator-math-minus" type="button" name="mortgage_year_minus">
                                 <svg class="icon icon-math-m ">
                                   <use xlink:href="./assets/icon/symbol/sprite.svg#math-m"></use>
                                 </svg>
                               </button>
-                              <button class="calculator-math__btn calculator-math-plus" type="button">
+                              <button class="calculator-math__btn calculator-math-plus" type="button" name="mortgage_year_plus">
                                 <svg class="icon icon-math-p ">
                                   <use xlink:href="./assets/icon/symbol/sprite.svg#math-p"></use>
                                 </svg>
@@ -145,7 +145,7 @@
                       <div class="calculator-form__field"> 
                         <div class="calculator-field__name">Interest Rate</div>
                         <div class="form-item"> 
-                          <input class="global-input calculator-input" type="text" name="interest_rate_mortgage" value="6">
+                          <input class="global-input calculator-input" type="text" name="interest_rate_mortgage" value="6" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                           <div class="calculator-form__icon"> 
                             <svg class="icon icon-percent ">
                               <use xlink:href="./assets/icon/symbol/sprite.svg#percent"></use>
@@ -159,19 +159,19 @@
                       <div class="calculator-form__field"> 
                         <div class="calculator-field__name">Property tax (montlhy)</div>
                         <div class="form-item"> 
-                          <input class="global-input calculator-input" type="text" name="property_tax" value="100">
+                          <input class="global-input calculator-input" type="text" name="property_tax" value="100" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                           <div class="calculator-form__icon"> 
                             <svg class="icon icon-dollar ">
                               <use xlink:href="./assets/icon/symbol/sprite.svg#dollar"></use>
                             </svg>
                           </div>
-                          <div class="calculator__label">0.03%</div>
+                          <div class="calculator__label" name="mortgage_tax_percent">0.03%</div>
                         </div>
                       </div>
                       <div class="calculator-form__field"> 
                         <div class="calculator-field__name">Home insurance (monthly)</div>
                         <div class="form-item"> 
-                          <input class="global-input calculator-input" type="text" name="home_insurance" value="100">
+                          <input class="global-input calculator-input" type="text" name="home_insurance" value="100" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                           <div class="calculator-form__icon"> 
                             <svg class="icon icon-dollar ">
                               <use xlink:href="./assets/icon/symbol/sprite.svg#dollar"></use>
@@ -182,7 +182,7 @@
                       <div class="calculator-form__field"> 
                         <div class="calculator-field__name">HOA dues (monthly)</div>
                         <div class="form-item"> 
-                          <input class="global-input calculator-input" type="text" name="HOA_dues" value="100">
+                          <input class="global-input calculator-input" type="text" name="HOA_dues" value="100" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                           <div class="calculator-form__icon"> 
                             <svg class="icon icon-dollar ">
                               <use xlink:href="./assets/icon/symbol/sprite.svg#dollar"></use>
