@@ -204,7 +204,7 @@
                       <div class="calculator-form__field"> 
                         <div class="calculator-field__name">Remaining balance</div>
                         <div class="form-item"> 
-                          <input class="global-input calculator-input" type="text" name="remaining_balance" value="50000">
+                          <input class="global-input calculator-input" type="text" name="remaining_balance" value="50000" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                           <div class="calculator-form__icon"> 
                             <svg class="icon icon-dollar ">
                               <use xlink:href="./assets/icon/symbol/sprite.svg#dollar"></use>
@@ -215,7 +215,7 @@
                       <div class="calculator-form__field"> 
                         <div class="calculator-field__name">Interest Rate</div>
                         <div class="form-item"> 
-                          <input class="global-input calculator-input" type="text" name="interest_rate_refinance_current" value="6">
+                          <input class="global-input calculator-input" type="text" name="interest_rate_refinance_current" value="6" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                           <div class="calculator-form__icon"> 
                             <svg class="icon icon-percent ">
                               <use xlink:href="./assets/icon/symbol/sprite.svg#percent"></use>
@@ -226,7 +226,7 @@
                       <div class="calculator-form__field"> 
                         <div class="calculator-field__name">Monthly payment</div>
                         <div class="form-item"> 
-                          <input class="global-input calculator-input" type="text" name="monthly_payment" value="358">
+                          <input class="global-input calculator-input" type="text" name="monthly_payment" value="358" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                           <div class="calculator-form__icon"> 
                             <svg class="icon icon-dollar ">
                               <use xlink:href="./assets/icon/symbol/sprite.svg#dollar"></use>
@@ -240,7 +240,7 @@
                       <div class="calculator-form__field"> 
                         <div class="calculator-field__name">Interest Rate</div>
                         <div class="form-item"> 
-                          <input class="global-input calculator-input" type="text" name="interest_rate_refinance_new" value="3.3">
+                          <input class="global-input calculator-input" type="text" name="interest_rate_refinance_new" value="3.3" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                           <div class="calculator-form__icon"> 
                             <svg class="icon icon-percent ">
                               <use xlink:href="./assets/icon/symbol/sprite.svg#percent"></use>
@@ -251,7 +251,7 @@
                       <div class="calculator-form__field"> 
                         <div class="calculator-field__name">New loan term</div>
                         <div class="form-item"> 
-                          <input class="global-input calculator-input" type="text" name="new_loan_term" value="30">
+                          <input class="global-input calculator-input" type="number" name="new_loan_term" value="30" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                           <div class="calculator-form__icon"> 
                             <svg class="icon icon-calendar ">
                               <use xlink:href="./assets/icon/symbol/sprite.svg#calendar"></use>
@@ -259,12 +259,12 @@
                           </div>
                           <div class="calculator__math"> 
                             <div class="calculator-math__btns"> 
-                              <button class="calculator-math__btn calculator-math-minus" type="button">
+                              <button class="calculator-math__btn calculator-math-minus" type="button" name="refinance-year-minus">
                                 <svg class="icon icon-math-m ">
                                   <use xlink:href="./assets/icon/symbol/sprite.svg#math-m"></use>
                                 </svg>
                               </button>
-                              <button class="calculator-math__btn calculator-math-plus" type="button">
+                              <button class="calculator-math__btn calculator-math-plus" type="button" name="refinance-year-plus">
                                 <svg class="icon icon-math-p ">
                                   <use xlink:href="./assets/icon/symbol/sprite.svg#math-p"></use>
                                 </svg>
@@ -277,7 +277,7 @@
                       <div class="calculator-form__field"> 
                         <div class="calculator-field__name">Closing costs</div>
                         <div class="form-item"> 
-                          <input class="global-input calculator-input" type="text" name="Closing_costs" value="4000">
+                          <input class="global-input calculator-input" type="text" name="Closing_costs" value="4000" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                           <div class="calculator-form__icon"> 
                             <svg class="icon icon-dollar ">
                               <use xlink:href="./assets/icon/symbol/sprite.svg#dollar"></use>
@@ -288,16 +288,16 @@
                     </div>
                   </form>
                   <div class="calculator-tab__graph">
-                    <div class="calculator-tab-graph__title global-title">Refinancing your mortgage could save you $- over 30 years and reduce your monthly payment by $121.50.</div>
+                    <div class="calculator-tab-graph__title global-title">Refinancing your mortgage could save you $- over <span name="refinance-title-year">30</span> years and <span name="refinance-title-value-sign">reduce</span> your monthly payment by $<span name="refinance-title-value">121.50</span>.</div>
                     <div class="calculator-tab__statistic"> 
                       <div id="refinance-chart"></div>
                     </div>
                     <div class="calculator-tab__buttons"> 
                       <div class="calculator-btn-graph-wrapp">
-                        <button class="calculator-graph__btn active" type="button"><span>Monthly Payment</span></button>
+                        <button class="calculator-graph__btn active" type="button" name="refinance-btn-monthly"><span>Monthly Payment</span></button>
                       </div>
                       <div class="calculator-btn-graph-wrapp">
-                        <button class="calculator-graph__btn" type="button"><span>Total Payment</span></button>
+                        <button class="calculator-graph__btn" type="button" name="refinance-btn-total"><span>Total Payment</span></button>
                       </div>
                     </div>
                   </div>
@@ -757,8 +757,9 @@
   transform: translateX(2%);
 }
 
-#mortgage-chart{
-  height: 100vh;
+.apexcharts-menu{
+  background-color: #000!important;
+  border: none !important;
 }
 
     </style>
