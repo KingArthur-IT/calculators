@@ -26,6 +26,8 @@
     var ApexCharts$1 = apexcharts_common.exports;
 
     const MONTHES$2 = 12.;
+    const mortgageElement = document.querySelector("#mortgage-chart");
+    var mortgageChart;
 
     var mortgageInputVals = {
         homePrice: 300000,
@@ -56,7 +58,7 @@
         mortageOutputVals.taxes = document.getElementsByName("property_tax")[0].value;
         mortageOutputVals.insurance = document.getElementsByName("home_insurance")[0].value;
         mortageOutputVals.HOA = document.getElementsByName("HOA_dues")[0].value;
-        mortageOutputVals.principalAndInterest = caclMortgage(mortgageInputVals.homePrice, mortgageInputVals.downPayment, mortgageInputVals.loanTerm, mortgageInputVals.interestRate);
+        mortageOutputVals.principalAndInterest = caclMortgage(mortgageInputVals.homePrice, mortgageInputVals.downPayment, mortgageInputVals.loanTerm, mortgageInputVals.interestRate).toFixed(2);
 
         createMortageChart();
     }
@@ -64,34 +66,41 @@
     function onInputMortage(){
         document.getElementsByName("home_price")[0].addEventListener('input', () => {
             mortgageInputVals.homePrice = document.getElementsByName("home_price")[0].value;
-            mortageOutputVals.principalAndInterest = caclMortgage(mortgageInputVals.homePrice, mortgageInputVals.downPayment, mortgageInputVals.loanTerm, mortgageInputVals.interestRate);
+            mortageOutputVals.principalAndInterest = caclMortgage(mortgageInputVals.homePrice, mortgageInputVals.downPayment, mortgageInputVals.loanTerm, mortgageInputVals.interestRate).toFixed(2);
+            updateMortageChart();
             console.log(mortageOutputVals);
         });
         document.getElementsByName("down_payment")[0].addEventListener('input', () => {
             mortgageInputVals.downPayment = document.getElementsByName("down_payment")[0].value;
-            mortageOutputVals.principalAndInterest = caclMortgage(mortgageInputVals.homePrice, mortgageInputVals.downPayment, mortgageInputVals.loanTerm, mortgageInputVals.interestRate);
+            mortageOutputVals.principalAndInterest = caclMortgage(mortgageInputVals.homePrice, mortgageInputVals.downPayment, mortgageInputVals.loanTerm, mortgageInputVals.interestRate).toFixed(2);
+            updateMortageChart();
             console.log(mortageOutputVals);
         });
         document.getElementsByName("loan_term")[0].addEventListener('input', () => {
             mortgageInputVals.loanTerm = document.getElementsByName("loan_term")[0].value;
-            mortageOutputVals.principalAndInterest = caclMortgage(mortgageInputVals.homePrice, mortgageInputVals.downPayment, mortgageInputVals.loanTerm, mortgageInputVals.interestRate);
+            mortageOutputVals.principalAndInterest = caclMortgage(mortgageInputVals.homePrice, mortgageInputVals.downPayment, mortgageInputVals.loanTerm, mortgageInputVals.interestRate).toFixed(2);
+            updateMortageChart();
             console.log(mortageOutputVals);
         });
         document.getElementsByName("interest_rate")[0].addEventListener('input', () => {
             mortgageInputVals.interestRate = document.getElementsByName("interest_rate")[0].value;
-            mortageOutputVals.principalAndInterest = caclMortgage(mortgageInputVals.homePrice, mortgageInputVals.downPayment, mortgageInputVals.loanTerm, mortgageInputVals.interestRate);
+            mortageOutputVals.principalAndInterest = caclMortgage(mortgageInputVals.homePrice, mortgageInputVals.downPayment, mortgageInputVals.loanTerm, mortgageInputVals.interestRate).toFixed(2);
+            updateMortageChart();
             console.log(mortageOutputVals);
         });
         document.getElementsByName("property_tax")[0].addEventListener('input', () => {
             mortageOutputVals.taxes = document.getElementsByName("property_tax")[0].value;
+            updateMortageChart();
             console.log(mortageOutputVals);
         });
         document.getElementsByName("home_insurance")[0].addEventListener('input', () => {
             mortageOutputVals.insurance = document.getElementsByName("home_insurance")[0].value;
+            updateMortageChart();
             console.log(mortageOutputVals);
         });
         document.getElementsByName("HOA_dues")[0].addEventListener('input', () => {
             mortageOutputVals.HOA = document.getElementsByName("HOA_dues")[0].value;
+            updateMortageChart();
             console.log(mortageOutputVals);
         });
     }
@@ -100,7 +109,7 @@
         return mortageOutputVals;
     }
 
-    var options = {
+    var options$2 = {
         series: Object.values(mortageOutputVals),
         labels: ['Principal & Interest', 'Taxes', 'Insurance', 'HOA'],
         chart: {
@@ -125,27 +134,43 @@
                   total: {
                     show: true,
                     label: 'Total',
-                    formatter: () => getTotal()
+                    formatter: () => '$ ' + getTotal(),
+                    color: '#ffffff',
+                    fontFamily: 'Riviera Nights'
                   }
                 }
               }
             }
+        },
+        legend:{
+            position: 'left',
+            fontFamily: 'Riviera Nights',
+            fontSize: 16,
+            color: '#ffffff',
         }
     };
 
     function getTotal(){
-        let total = mortageOutputVals.HOA + mortageOutputVals.insurance + mortageOutputVals.principalAndInterest + mortageOutputVals.taxes;
-        return Number(total).toPrecision(6)
+        let total = 1. * mortageOutputVals.HOA + 1. * mortageOutputVals.insurance + 1. * mortageOutputVals.principalAndInterest + 1. * mortageOutputVals.taxes;
+        return Number(total).toFixed(2)
     }
 
     function createMortageChart(){
         const vals = Object.values(mortageOutputVals).map((i) => i * 1.);
-        options.series = vals;
-        var chart = new ApexCharts$1(document.querySelector("#mortgage-chart"), options);
-        chart.render();
+        options$2.series = vals;
+        mortgageChart = new ApexCharts$1(mortgageElement, options$2);
+        mortgageChart.render();
+    }
+
+    function updateMortageChart(){
+        const vals = Object.values(mortageOutputVals).map((i) => i * 1.);
+        options$2.series = vals;
+        mortgageChart.updateOptions(options$2, false, true, true);
     }
 
     const MONTHES$1 = 12.;
+    const refinanceElement = document.querySelector("#refinance-chart");
+    var refinanceChart;
 
     var refinanceInputVals = {
         remainingBalance: 50000,
@@ -156,7 +181,7 @@
     };
 
     var refinanceOutputVals = {
-        currentPayment: 358,
+        currentPayment: 0,
         newPayment: 0
     };
 
@@ -175,38 +200,46 @@
         refinanceInputVals.closingCosts = document.getElementsByName("Closing_costs")[0].value;
 
         refinanceOutputVals.currentPayment = document.getElementsByName("monthly_payment")[0].value;
-        refinanceOutputVals.newPayment = caclRefinance(refinanceInputVals.remainingBalance, refinanceInputVals.closingCosts, refinanceInputVals.newLoanTerm, refinanceInputVals.interestRateNew);
+        refinanceOutputVals.newPayment = caclRefinance(refinanceInputVals.remainingBalance, refinanceInputVals.closingCosts, refinanceInputVals.newLoanTerm, refinanceInputVals.interestRateNew).toFixed(2);
+
+        createRefinanceChart();
     }
 
     function onInputRefinance(){
         document.getElementsByName("remaining_balance")[0].addEventListener('input', () => {
             refinanceInputVals.remainingBalance = document.getElementsByName("remaining_balance")[0].value;
-            refinanceOutputVals.newPayment = caclRefinance(refinanceInputVals.remainingBalance, refinanceInputVals.closingCosts, refinanceInputVals.newLoanTerm, refinanceInputVals.interestRateNew);
+            refinanceOutputVals.newPayment = caclRefinance(refinanceInputVals.remainingBalance, refinanceInputVals.closingCosts, refinanceInputVals.newLoanTerm, refinanceInputVals.interestRateNew).toFixed(2);
             console.log(refinanceOutputVals);
+            updateRefinanceChart();
         });
         document.getElementsByName("interest_rate_refinance_current")[0].addEventListener('input', () => {
             refinanceInputVals.interestRateCurrent = document.getElementsByName("interest_rate_refinance_current")[0].value;
-            refinanceOutputVals.newPayment = caclRefinance(refinanceInputVals.remainingBalance, refinanceInputVals.closingCosts, refinanceInputVals.newLoanTerm, refinanceInputVals.interestRateNew);
+            refinanceOutputVals.newPayment = caclRefinance(refinanceInputVals.remainingBalance, refinanceInputVals.closingCosts, refinanceInputVals.newLoanTerm, refinanceInputVals.interestRateNew).toFixed(2);
             console.log(refinanceOutputVals);
+            updateRefinanceChart();
         });
         document.getElementsByName("interest_rate_refinance_new")[0].addEventListener('input', () => {
             refinanceInputVals.interestRateNew = document.getElementsByName("interest_rate_refinance_new")[0].value;
-            refinanceOutputVals.newPayment = caclRefinance(refinanceInputVals.remainingBalance, refinanceInputVals.closingCosts, refinanceInputVals.newLoanTerm, refinanceInputVals.interestRateNew);
+            refinanceOutputVals.newPayment = caclRefinance(refinanceInputVals.remainingBalance, refinanceInputVals.closingCosts, refinanceInputVals.newLoanTerm, refinanceInputVals.interestRateNew).toFixed(2);
             console.log(refinanceOutputVals);
+            updateRefinanceChart();
         });
         document.getElementsByName("new_loan_term")[0].addEventListener('input', () => {
             refinanceInputVals.newLoanTerm = document.getElementsByName("new_loan_term")[0].value;
-            refinanceOutputVals.newPayment = caclRefinance(refinanceInputVals.remainingBalance, refinanceInputVals.closingCosts, refinanceInputVals.newLoanTerm, refinanceInputVals.interestRateNew);
+            refinanceOutputVals.newPayment = caclRefinance(refinanceInputVals.remainingBalance, refinanceInputVals.closingCosts, refinanceInputVals.newLoanTerm, refinanceInputVals.interestRateNew).toFixed(2);
             console.log(refinanceOutputVals);
+            updateRefinanceChart();
         });
         document.getElementsByName("Closing_costs")[0].addEventListener('input', () => {
             refinanceInputVals.closingCosts = document.getElementsByName("Closing_costs")[0].value;
-            refinanceOutputVals.newPayment = caclRefinance(refinanceInputVals.remainingBalance, refinanceInputVals.closingCosts, refinanceInputVals.newLoanTerm, refinanceInputVals.interestRateNew);
+            refinanceOutputVals.newPayment = caclRefinance(refinanceInputVals.remainingBalance, refinanceInputVals.closingCosts, refinanceInputVals.newLoanTerm, refinanceInputVals.interestRateNew).toFixed(2);
             console.log(refinanceOutputVals);
+            updateRefinanceChart();
         });
         document.getElementsByName("monthly_payment")[0].addEventListener('input', () => {
             refinanceOutputVals.currentPayment = document.getElementsByName("monthly_payment")[0].value;
             console.log(refinanceOutputVals);
+            updateRefinanceChart();
         });
     }
 
@@ -214,7 +247,40 @@
         return refinanceOutputVals
     }
 
+
+    var options$1 = {
+        series: [{ data: Object.values(refinanceOutputVals) }],
+        xaxis: {
+            categories: ['Current payment', 'New payment'],
+        },
+        chart: {
+            type: 'bar',
+            height: 300,
+            width: 600
+        },
+        plotOptions: {
+            bar: {
+              horizontal: true
+            }
+        },
+    };
+
+    function createRefinanceChart(){
+        const vals = Object.values(refinanceOutputVals).map((i) => i * 1.);
+        options$1.series[0].data = vals;
+        refinanceChart = new ApexCharts$1(refinanceElement, options$1);
+        refinanceChart.render();
+    }
+
+    function updateRefinanceChart(){
+        const vals = Object.values(refinanceOutputVals).map((i) => i * 1.);
+        options$1.series[0].data = vals;
+        refinanceChart.updateOptions(options$1, true, true, true);
+    }
+
     const MONTHES = 12.;
+    const comparisonElement = document.querySelector("#comparison-chart");
+    var comparisonChart;
 
     var loanComparisonInputVals = {
         loanAmount: 250000,
@@ -254,6 +320,8 @@
 
         loanComparisonOutputVals.tax = document.getElementsByName("property_tax_loan_comparison")[0].value;
         loanComparisonOutputVals.insurance = document.getElementsByName("homeowners_insurance")[0].value;
+
+        createComparisonChart();
     }
 
     function onInputLoanComparison(){
@@ -268,6 +336,7 @@
             loanComparisonOutputVals.principalOption2 = option2.principal;
             
             console.log(loanComparisonOutputVals);
+            updateComparisonChart();
         });
         document.getElementsByName("loan_term_comparison_1")[0].addEventListener('input', () => {
             loanComparisonInputVals.loanTermOption1 = document.getElementsByName("loan_term_comparison_1")[0].value;
@@ -277,6 +346,7 @@
             loanComparisonOutputVals.principalOption1 = option1.principal;
             
             console.log(loanComparisonOutputVals);
+            updateComparisonChart();
         });
         document.getElementsByName("loan_term_comparison_2")[0].addEventListener('input', () => {
             loanComparisonInputVals.loanTermOption2 = document.getElementsByName("loan_term_comparison_2")[0].value;
@@ -286,6 +356,7 @@
             loanComparisonOutputVals.principalOption2 = option2.principal;
             
             console.log(loanComparisonOutputVals);
+            updateComparisonChart();
         });
         document.getElementsByName("interest_rate_comparison_1")[0].addEventListener('input', () => {
             loanComparisonInputVals.interestRateOpetion1 = document.getElementsByName("interest_rate_comparison_1")[0].value;
@@ -295,6 +366,7 @@
             loanComparisonOutputVals.principalOption1 = option1.principal;
             
             console.log(loanComparisonOutputVals);
+            updateComparisonChart();
         });
         document.getElementsByName("interest_rate_comparison_2")[0].addEventListener('input', () => {
             loanComparisonInputVals.interestRateOpetion2 = document.getElementsByName("interest_rate_comparison_2")[0].value;
@@ -304,11 +376,91 @@
             loanComparisonOutputVals.principalOption2 = option2.principal;
             
             console.log(loanComparisonOutputVals);
+            updateComparisonChart();
         });
     }
 
     function getLoanComparisonOutputVals(){
         return loanComparisonOutputVals
+    }
+
+    var options = {
+        series: [{
+            name: 'Incurance',
+            data: [0, 0]
+        }, {
+        name: 'Taxes',
+        data: [0, 0]
+      }, {
+        name: 'Interest',
+        data: [0, 0]
+      }, {
+        name: 'Principal',
+        data: [0, 0]
+      }],
+        chart: {
+        type: 'bar',
+        height: 300,
+        width: 600,
+        stacked: true,
+      },
+      plotOptions: {
+        bar: {
+          horizontal: true,
+        },
+      },
+      stroke: {
+        width: 1,
+        colors: ['#fff']
+      },
+      title: {
+        text: 'Loan Option 1 will be $1,521.98 lower than loan Loan Option 2.'
+      },
+      xaxis: {
+        categories: ['Loan Option1', 'Loan Option2'],
+        labels: {
+          formatter: function (val) {
+            return '$' + val + "K"
+          }
+        }
+      },
+      yaxis: {
+        title: {
+          text: undefined
+        },
+      },
+      tooltip: {
+        y: {
+          formatter: function (val) {
+            return '$' + val + "K"
+          }
+        }
+      },
+      fill: {
+        opacity: 1
+      },
+      legend: {
+        position: 'top',
+        horizontalAlign: 'left',
+        offsetX: 40
+      }
+    };
+
+    function createComparisonChart(){
+        options.series[0].data = [loanComparisonOutputVals.insurance, loanComparisonOutputVals.insurance];
+        options.series[1].data = [loanComparisonOutputVals.tax, loanComparisonOutputVals.tax];
+        options.series[2].data = [loanComparisonOutputVals.interestOption1, loanComparisonOutputVals.interestOption2];
+        options.series[3].data = [loanComparisonOutputVals.principalOption1, loanComparisonOutputVals.principalOption2];
+        comparisonChart = new ApexCharts$1(comparisonElement, options);
+        comparisonChart.render();
+    }
+
+    function updateComparisonChart(){
+        options.series[0].data = [loanComparisonOutputVals.insurance, loanComparisonOutputVals.insurance];
+        options.series[1].data = [loanComparisonOutputVals.tax, loanComparisonOutputVals.tax];
+        options.series[2].data = [loanComparisonOutputVals.interestOption1, loanComparisonOutputVals.interestOption2];
+        options.series[3].data = [loanComparisonOutputVals.principalOption1, loanComparisonOutputVals.principalOption2];
+        comparisonChart.updateOptions(options, false, true, true);
     }
 
     class App {

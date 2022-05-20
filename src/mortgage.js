@@ -1,6 +1,8 @@
 import ApexCharts from 'apexcharts';
 
 const MONTHES = 12.;
+const mortgageElement = document.querySelector("#mortgage-chart");
+var mortgageChart;
 
 var mortgageInputVals = {
     homePrice: 300000,
@@ -31,7 +33,7 @@ export function getInitMortageValues(){
     mortageOutputVals.taxes = document.getElementsByName("property_tax")[0].value;
     mortageOutputVals.insurance = document.getElementsByName("home_insurance")[0].value;
     mortageOutputVals.HOA = document.getElementsByName("HOA_dues")[0].value;
-    mortageOutputVals.principalAndInterest = caclMortgage(mortgageInputVals.homePrice, mortgageInputVals.downPayment, mortgageInputVals.loanTerm, mortgageInputVals.interestRate)
+    mortageOutputVals.principalAndInterest = caclMortgage(mortgageInputVals.homePrice, mortgageInputVals.downPayment, mortgageInputVals.loanTerm, mortgageInputVals.interestRate).toFixed(2)
 
     createMortageChart();
 }
@@ -39,34 +41,41 @@ export function getInitMortageValues(){
 export function onInputMortage(){
     document.getElementsByName("home_price")[0].addEventListener('input', () => {
         mortgageInputVals.homePrice = document.getElementsByName("home_price")[0].value;
-        mortageOutputVals.principalAndInterest = caclMortgage(mortgageInputVals.homePrice, mortgageInputVals.downPayment, mortgageInputVals.loanTerm, mortgageInputVals.interestRate);
+        mortageOutputVals.principalAndInterest = caclMortgage(mortgageInputVals.homePrice, mortgageInputVals.downPayment, mortgageInputVals.loanTerm, mortgageInputVals.interestRate).toFixed(2);
+        updateMortageChart();
         console.log(mortageOutputVals);
     })
     document.getElementsByName("down_payment")[0].addEventListener('input', () => {
         mortgageInputVals.downPayment = document.getElementsByName("down_payment")[0].value;
-        mortageOutputVals.principalAndInterest = caclMortgage(mortgageInputVals.homePrice, mortgageInputVals.downPayment, mortgageInputVals.loanTerm, mortgageInputVals.interestRate);
+        mortageOutputVals.principalAndInterest = caclMortgage(mortgageInputVals.homePrice, mortgageInputVals.downPayment, mortgageInputVals.loanTerm, mortgageInputVals.interestRate).toFixed(2);
+        updateMortageChart();
         console.log(mortageOutputVals);
     })
     document.getElementsByName("loan_term")[0].addEventListener('input', () => {
         mortgageInputVals.loanTerm = document.getElementsByName("loan_term")[0].value;
-        mortageOutputVals.principalAndInterest = caclMortgage(mortgageInputVals.homePrice, mortgageInputVals.downPayment, mortgageInputVals.loanTerm, mortgageInputVals.interestRate);
+        mortageOutputVals.principalAndInterest = caclMortgage(mortgageInputVals.homePrice, mortgageInputVals.downPayment, mortgageInputVals.loanTerm, mortgageInputVals.interestRate).toFixed(2);
+        updateMortageChart();
         console.log(mortageOutputVals);
     })
     document.getElementsByName("interest_rate")[0].addEventListener('input', () => {
         mortgageInputVals.interestRate = document.getElementsByName("interest_rate")[0].value;
-        mortageOutputVals.principalAndInterest = caclMortgage(mortgageInputVals.homePrice, mortgageInputVals.downPayment, mortgageInputVals.loanTerm, mortgageInputVals.interestRate);
+        mortageOutputVals.principalAndInterest = caclMortgage(mortgageInputVals.homePrice, mortgageInputVals.downPayment, mortgageInputVals.loanTerm, mortgageInputVals.interestRate).toFixed(2);
+        updateMortageChart();
         console.log(mortageOutputVals);
     })
     document.getElementsByName("property_tax")[0].addEventListener('input', () => {
         mortageOutputVals.taxes = document.getElementsByName("property_tax")[0].value;
+        updateMortageChart();
         console.log(mortageOutputVals);
     })
     document.getElementsByName("home_insurance")[0].addEventListener('input', () => {
         mortageOutputVals.insurance = document.getElementsByName("home_insurance")[0].value;
+        updateMortageChart();
         console.log(mortageOutputVals);
     })
     document.getElementsByName("HOA_dues")[0].addEventListener('input', () => {
         mortageOutputVals.HOA = document.getElementsByName("HOA_dues")[0].value;
+        updateMortageChart();
         console.log(mortageOutputVals);
     })
 }
@@ -100,22 +109,36 @@ var options = {
               total: {
                 show: true,
                 label: 'Total',
-                formatter: () => getTotal()
+                formatter: () => '$ ' + getTotal(),
+                color: '#ffffff',
+                fontFamily: 'Riviera Nights'
               }
             }
           }
         }
+    },
+    legend:{
+        position: 'left',
+        fontFamily: 'Riviera Nights',
+        fontSize: 16,
+        color: '#ffffff',
     }
 };
 
 function getTotal(){
-    let total = mortageOutputVals.HOA + mortageOutputVals.insurance + mortageOutputVals.principalAndInterest + mortageOutputVals.taxes;
-    return Number(total).toPrecision(6)
+    let total = 1. * mortageOutputVals.HOA + 1. * mortageOutputVals.insurance + 1. * mortageOutputVals.principalAndInterest + 1. * mortageOutputVals.taxes;
+    return Number(total).toFixed(2)
 }
 
-export function createMortageChart(){
+function createMortageChart(){
     const vals = Object.values(mortageOutputVals).map((i) => i * 1.)
     options.series = vals
-    var chart = new ApexCharts(document.querySelector("#mortgage-chart"), options);
-    chart.render();
+    mortgageChart = new ApexCharts(mortgageElement, options);
+    mortgageChart.render();
+}
+
+function updateMortageChart(){
+    const vals = Object.values(mortageOutputVals).map((i) => i * 1.)
+    options.series = vals
+    mortgageChart.updateOptions(options, false, true, true)
 }
