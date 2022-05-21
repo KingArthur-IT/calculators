@@ -25,6 +25,8 @@
 
     var ApexCharts$1 = apexcharts_common.exports;
 
+    //<input class="global-input calculator-input" type="text" name="property_tax" value="100" >
+    //oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/\B(?=(?:\d{3})+(?!\d))/g, ',');"
     const MONTHES$2 = 12.;
     const mortgageElement = document.querySelector("#mortgage-chart");
     var mortgageChart;
@@ -50,14 +52,14 @@
     }
 
     function getInitMortageValues(){
-        mortgageInputVals.homePrice = document.getElementsByName("home_price")[0].value;
-        mortgageInputVals.downPayment = document.getElementsByName("down_payment")[0].value;
+        mortgageInputVals.homePrice = document.getElementsByName("home_price")[0].value.replaceAll(',', '');
+        mortgageInputVals.downPayment = document.getElementsByName("down_payment")[0].value.replaceAll(',', '');
         mortgageInputVals.loanTerm = document.getElementsByName("loan_term")[0].value;
         mortgageInputVals.interestRate = document.getElementsByName("interest_rate_mortgage")[0].value;
 
-        mortageOutputVals.taxes = document.getElementsByName("property_tax")[0].value;
-        mortageOutputVals.insurance = document.getElementsByName("home_insurance")[0].value;
-        mortageOutputVals.HOA = document.getElementsByName("HOA_dues")[0].value;
+        mortageOutputVals.taxes = document.getElementsByName("property_tax")[0].value.replaceAll(',', '');
+        mortageOutputVals.insurance = document.getElementsByName("home_insurance")[0].value.replaceAll(',', '');
+        mortageOutputVals.HOA = document.getElementsByName("HOA_dues")[0].value.replaceAll(',', '');
         mortageOutputVals.principalAndInterest = caclMortgage(mortgageInputVals.homePrice, mortgageInputVals.downPayment, mortgageInputVals.loanTerm, mortgageInputVals.interestRate).toFixed(2);
 
         createMortageChart();
@@ -65,7 +67,7 @@
 
     function onInputMortage(){
         document.getElementsByName("home_price")[0].addEventListener('input', () => {
-            mortgageInputVals.homePrice = document.getElementsByName("home_price")[0].value;
+            mortgageInputVals.homePrice = document.getElementsByName("home_price")[0].value.replaceAll(',', '');
             mortageOutputVals.principalAndInterest = caclMortgage(mortgageInputVals.homePrice, mortgageInputVals.downPayment, mortgageInputVals.loanTerm, mortgageInputVals.interestRate).toFixed(2);
             updateMortageChart();
             if (mortgageInputVals.homePrice > 0){
@@ -78,7 +80,7 @@
             }
         });
         document.getElementsByName("down_payment")[0].addEventListener('input', () => {
-            mortgageInputVals.downPayment = document.getElementsByName("down_payment")[0].value;
+            mortgageInputVals.downPayment = document.getElementsByName("down_payment")[0].value.replaceAll(',', '');
             mortageOutputVals.principalAndInterest = caclMortgage(mortgageInputVals.homePrice, mortgageInputVals.downPayment, mortgageInputVals.loanTerm, mortgageInputVals.interestRate).toFixed(2);
             updateMortageChart();
             if (mortgageInputVals.homePrice > 0)
@@ -106,18 +108,18 @@
             updateMortageChart();
         });
         document.getElementsByName("property_tax")[0].addEventListener('input', () => {
-            mortageOutputVals.taxes = document.getElementsByName("property_tax")[0].value;
+            mortageOutputVals.taxes = document.getElementsByName("property_tax")[0].value.replaceAll(',', '');
             updateMortageChart();
             if (mortgageInputVals.homePrice > 0)
                 document.getElementsByName("mortgage_tax_percent")[0].innerHTML = (100. * mortageOutputVals.taxes / mortgageInputVals.homePrice).toFixed(2) + '%';
             else document.getElementsByName("mortgage_tax_percent")[0].innerHTML = '100%';
         });
         document.getElementsByName("home_insurance")[0].addEventListener('input', () => {
-            mortageOutputVals.insurance = document.getElementsByName("home_insurance")[0].value;
+            mortageOutputVals.insurance = document.getElementsByName("home_insurance")[0].value.replaceAll(',', '');
             updateMortageChart();
         });
         document.getElementsByName("HOA_dues")[0].addEventListener('input', () => {
-            mortageOutputVals.HOA = document.getElementsByName("HOA_dues")[0].value;
+            mortageOutputVals.HOA = document.getElementsByName("HOA_dues")[0].value.replaceAll(',', '');
             updateMortageChart();
         });
     }
@@ -150,7 +152,7 @@
                     label: 'Total',
                     fontFamily: 'Riviera Nights',
                     formatter: function () {
-                        return '$ ' + getTotal$1()
+                        return '$ ' + getTotal$1().replace(/\B(?=(?:\d{3})+(?!\d))/g, ',')
                     }
                   },
                   value: {
@@ -160,7 +162,7 @@
                     fontWeight: 400,
                     color: '#ffffff',
                     formatter: function (val) {
-                      return '$ ' + val
+                      return '$ ' + val.replace(/\B(?=(?:\d{3})+(?!\d))/g, ',')
                     }
                   },
                 },
@@ -247,13 +249,13 @@
     }
 
     function getInitRefinanceValues(){
-        refinanceInputVals.remainingBalance = document.getElementsByName("remaining_balance")[0].value;
+        refinanceInputVals.remainingBalance = document.getElementsByName("remaining_balance")[0].value.replaceAll(',', '');
         refinanceInputVals.interestRateCurrent = document.getElementsByName("interest_rate_refinance_current")[0].value;
         refinanceInputVals.interestRateNew = document.getElementsByName("interest_rate_refinance_new")[0].value;
         refinanceInputVals.newLoanTerm = document.getElementsByName("new_loan_term")[0].value;
-        refinanceInputVals.closingCosts = document.getElementsByName("Closing_costs")[0].value;
+        refinanceInputVals.closingCosts = document.getElementsByName("Closing_costs")[0].value.replaceAll(',', '');
 
-        refinanceOutputVals.currentPayment = document.getElementsByName("monthly_payment")[0].value;
+        refinanceOutputVals.currentPayment = document.getElementsByName("monthly_payment")[0].value.replaceAll(',', '');
         refinanceOutputVals.newPayment = caclRefinance(refinanceInputVals.remainingBalance, refinanceInputVals.closingCosts, refinanceInputVals.newLoanTerm, refinanceInputVals.interestRateNew).toFixed(2);
 
         createRefinanceChart();
@@ -261,7 +263,7 @@
 
     function onInputRefinance(){
         document.getElementsByName("remaining_balance")[0].addEventListener('input', () => {
-            refinanceInputVals.remainingBalance = document.getElementsByName("remaining_balance")[0].value;
+            refinanceInputVals.remainingBalance = document.getElementsByName("remaining_balance")[0].value.replaceAll(',', '');
             refinanceOutputVals.newPayment = caclRefinance(refinanceInputVals.remainingBalance, refinanceInputVals.closingCosts, refinanceInputVals.newLoanTerm, refinanceInputVals.interestRateNew).toFixed(2);
             updateRefinanceChart();
         });
@@ -294,12 +296,12 @@
             document.getElementsByName("refinance-title-year")[0].innerHTML = refinanceInputVals.newLoanTerm;
         });
         document.getElementsByName("Closing_costs")[0].addEventListener('input', () => {
-            refinanceInputVals.closingCosts = document.getElementsByName("Closing_costs")[0].value;
+            refinanceInputVals.closingCosts = document.getElementsByName("Closing_costs")[0].value.replaceAll(',', '');
             refinanceOutputVals.newPayment = caclRefinance(refinanceInputVals.remainingBalance, refinanceInputVals.closingCosts, refinanceInputVals.newLoanTerm, refinanceInputVals.interestRateNew).toFixed(2);
             updateRefinanceChart();
         });
         document.getElementsByName("monthly_payment")[0].addEventListener('input', () => {
-            refinanceOutputVals.currentPayment = document.getElementsByName("monthly_payment")[0].value;
+            refinanceOutputVals.currentPayment = document.getElementsByName("monthly_payment")[0].value.replaceAll(',', '');
             updateRefinanceChart();
         });
     }
@@ -329,7 +331,7 @@
                 style:{
                     colors: ['#ffffff']
                 },
-                formatter: function(value) { return '$' + value }
+                formatter: function(value) { return '$' + String(value).replace(/\B(?=(?:\d{3})+(?!\d))/g, ',') }
             }
         },
         yaxis:{
@@ -357,7 +359,7 @@
         tooltip: {
             y: {
               formatter: function (val) {
-                return '$' + val
+                return '$' + String(val).replace(/\B(?=(?:\d{3})+(?!\d))/g, ',')
               },
             },
             theme: 'dark'
@@ -382,7 +384,7 @@
 
         const newVal = isFinite(refinanceOutputVals.newPayment) ? refinanceOutputVals.newPayment : refinanceOutputVals.currentPayment;
         const refinanceValue = newVal - refinanceOutputVals.currentPayment;
-        document.getElementsByName("refinance-title-value")[0].innerHTML = Math.abs(refinanceValue).toFixed(2);
+        document.getElementsByName("refinance-title-value")[0].innerHTML = Math.abs(refinanceValue).toFixed(2).replace(/\B(?=(?:\d{3})+(?!\d))/g, ',');
         document.getElementsByName("refinance-title-value-sign")[0].innerHTML = Math.sign(refinanceValue) > 0 ? 'increase' : 'reduce';
     }
 
@@ -426,14 +428,14 @@
     }
 
     function getInitLoanComparisonValues(){
-        loanComparisonInputVals.loanAmount = document.getElementsByName("loan_amount")[0].value;
+        loanComparisonInputVals.loanAmount = document.getElementsByName("loan_amount")[0].value.replaceAll(',', '');
         loanComparisonInputVals.loanTermOption1 = document.getElementsByName("loan_term_comparison_1")[0].value;
         loanComparisonInputVals.loanTermOption2 = document.getElementsByName("loan_term_comparison_2")[0].value;
         loanComparisonInputVals.interestRateOpetion1 = document.getElementsByName("interest_rate_comparison_1")[0].value;
         loanComparisonInputVals.interestRateOpetion2 = document.getElementsByName("interest_rate_comparison_2")[0].value;
 
-        loanComparisonOutputVals.tax = document.getElementsByName("property_tax_loan_comparison")[0].value;
-        loanComparisonOutputVals.insurance = document.getElementsByName("homeowners_insurance_loan_comparison")[0].value;
+        loanComparisonOutputVals.tax = document.getElementsByName("property_tax_loan_comparison")[0].value.replaceAll(',', '');
+        loanComparisonOutputVals.insurance = document.getElementsByName("homeowners_insurance_loan_comparison")[0].value.replaceAll(',', '');
         
         calcOption1();
         calcOption2();
@@ -442,7 +444,7 @@
 
     function onInputLoanComparison(){
         document.getElementsByName("loan_amount")[0].addEventListener('input', () => {
-            loanComparisonInputVals.loanAmount = document.getElementsByName("loan_amount")[0].value;
+            loanComparisonInputVals.loanAmount = document.getElementsByName("loan_amount")[0].value.replaceAll(',', '');
 
             calcOption1();
             calcOption2();
@@ -502,12 +504,12 @@
             updateComparisonChart();
         });
         document.getElementsByName("property_tax_loan_comparison")[0].addEventListener('input', () => {
-            loanComparisonOutputVals.tax = document.getElementsByName("property_tax_loan_comparison")[0].value;
+            loanComparisonOutputVals.tax = document.getElementsByName("property_tax_loan_comparison")[0].value.replaceAll(',', '');
             updateComparisonChart();
             document.getElementsByName('comparison-tax-percent')[0].innerHTML = (100. * loanComparisonOutputVals.tax / loanComparisonInputVals.loanAmount).toFixed(2) + '%';
         });
         document.getElementsByName("homeowners_insurance_loan_comparison")[0].addEventListener('input', () => {
-            loanComparisonOutputVals.insurance = document.getElementsByName("homeowners_insurance_loan_comparison")[0].value;
+            loanComparisonOutputVals.insurance = document.getElementsByName("homeowners_insurance_loan_comparison")[0].value.replaceAll(',', '');
             updateComparisonChart();
             document.getElementsByName('comparison-insurance-percent')[0].innerHTML = (100. * loanComparisonOutputVals.insurance / loanComparisonInputVals.loanAmount).toFixed(2) + '%';
         });
@@ -596,13 +598,13 @@
             },
             formatter: function(value, { seriesIndex, dataPointIndex, w}) {
                 if (seriesIndex === 0)
-                    return '$' + w.globals.stackedSeriesTotals[dataPointIndex].toFixed(2)
+                    return '$' + w.globals.stackedSeriesTotals[dataPointIndex].toFixed(2).replace(/\B(?=(?:\d{3})+(?!\d))/g, ',')
             }
         },
         tooltip: {
             y: {
               formatter: function (val) {
-                return '$' + Number(val).toFixed(2)
+                return '$' + String(Number(val).toFixed(2)).replace(/\B(?=(?:\d{3})+(?!\d))/g, ',')
               },
             },
             theme: 'dark'
@@ -641,7 +643,7 @@
 
     function updateComparisonChart(){
         const diff = loanComparisonOutputVals.interestOption1 + loanComparisonOutputVals.principalOption1 - loanComparisonOutputVals.interestOption2 - loanComparisonOutputVals.principalOption2;
-        document.getElementsByName('comparison-title-value')[0].innerHTML = Math.abs(diff).toFixed(2);
+        document.getElementsByName('comparison-title-value')[0].innerHTML = Math.abs(diff).toFixed(2).replace(/\B(?=(?:\d{3})+(?!\d))/g, ',');
         document.getElementsByName('comparison-title-sign')[0].innerHTML = Math.sign(diff) > 0 ? 'bigger' : 'lower';
 
         comparisonChart.destroy();
@@ -737,7 +739,7 @@
                     label: 'Total',
                     fontFamily: 'Riviera Nights',
                     formatter: function () {
-                        return '$ ' + getTotal()
+                        return '$ ' + String(getTotal()).replace(/\B(?=(?:\d{3})+(?!\d))/g, ',')
                     }
                   },
                   value: {
@@ -747,7 +749,7 @@
                     fontWeight: 400,
                     color: '#ffffff',
                     formatter: function (val) {
-                      return '$ ' + val
+                      return '$ ' + String(Number(val).toFixed(2)).replace(/\B(?=(?:\d{3})+(?!\d))/g, ',')
                     }
                   },
                 },
@@ -779,7 +781,7 @@
         tooltip: {
             y: {
                 formatter: function(value) {
-                  return '$' + value
+                  return '$' + String(value.toFixed(2)).replace(/\B(?=(?:\d{3})+(?!\d))/g, ',')
                 }
               }
         },

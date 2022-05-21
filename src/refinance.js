@@ -25,13 +25,13 @@ export function caclRefinance(balance, closingCosts, loanTerm, interestRate){
 }
 
 export function getInitRefinanceValues(){
-    refinanceInputVals.remainingBalance = document.getElementsByName("remaining_balance")[0].value;
+    refinanceInputVals.remainingBalance = document.getElementsByName("remaining_balance")[0].value.replaceAll(',', '');
     refinanceInputVals.interestRateCurrent = document.getElementsByName("interest_rate_refinance_current")[0].value;
     refinanceInputVals.interestRateNew = document.getElementsByName("interest_rate_refinance_new")[0].value;
     refinanceInputVals.newLoanTerm = document.getElementsByName("new_loan_term")[0].value;
-    refinanceInputVals.closingCosts = document.getElementsByName("Closing_costs")[0].value;
+    refinanceInputVals.closingCosts = document.getElementsByName("Closing_costs")[0].value.replaceAll(',', '');
 
-    refinanceOutputVals.currentPayment = document.getElementsByName("monthly_payment")[0].value;
+    refinanceOutputVals.currentPayment = document.getElementsByName("monthly_payment")[0].value.replaceAll(',', '');
     refinanceOutputVals.newPayment = caclRefinance(refinanceInputVals.remainingBalance, refinanceInputVals.closingCosts, refinanceInputVals.newLoanTerm, refinanceInputVals.interestRateNew).toFixed(2);
 
     createRefinanceChart();
@@ -39,7 +39,7 @@ export function getInitRefinanceValues(){
 
 export function onInputRefinance(){
     document.getElementsByName("remaining_balance")[0].addEventListener('input', () => {
-        refinanceInputVals.remainingBalance = document.getElementsByName("remaining_balance")[0].value;
+        refinanceInputVals.remainingBalance = document.getElementsByName("remaining_balance")[0].value.replaceAll(',', '');
         refinanceOutputVals.newPayment = caclRefinance(refinanceInputVals.remainingBalance, refinanceInputVals.closingCosts, refinanceInputVals.newLoanTerm, refinanceInputVals.interestRateNew).toFixed(2);
         updateRefinanceChart();
     })
@@ -72,12 +72,12 @@ export function onInputRefinance(){
         document.getElementsByName("refinance-title-year")[0].innerHTML = refinanceInputVals.newLoanTerm;
     })
     document.getElementsByName("Closing_costs")[0].addEventListener('input', () => {
-        refinanceInputVals.closingCosts = document.getElementsByName("Closing_costs")[0].value;
+        refinanceInputVals.closingCosts = document.getElementsByName("Closing_costs")[0].value.replaceAll(',', '');
         refinanceOutputVals.newPayment = caclRefinance(refinanceInputVals.remainingBalance, refinanceInputVals.closingCosts, refinanceInputVals.newLoanTerm, refinanceInputVals.interestRateNew).toFixed(2);
         updateRefinanceChart();
     })
     document.getElementsByName("monthly_payment")[0].addEventListener('input', () => {
-        refinanceOutputVals.currentPayment = document.getElementsByName("monthly_payment")[0].value;
+        refinanceOutputVals.currentPayment = document.getElementsByName("monthly_payment")[0].value.replaceAll(',', '');
         updateRefinanceChart();
     })
 }
@@ -111,7 +111,7 @@ var options = {
             style:{
                 colors: ['#ffffff']
             },
-            formatter: function(value) { return '$' + value }
+            formatter: function(value) { return '$' + String(value).replace(/\B(?=(?:\d{3})+(?!\d))/g, ',') }
         }
     },
     yaxis:{
@@ -139,7 +139,7 @@ var options = {
     tooltip: {
         y: {
           formatter: function (val) {
-            return '$' + val
+            return '$' + String(val).replace(/\B(?=(?:\d{3})+(?!\d))/g, ',')
           },
         },
         theme: 'dark'
@@ -164,7 +164,7 @@ function updateRefinanceChart(seriesName = 'Monthly'){
 
     const newVal = isFinite(refinanceOutputVals.newPayment) ? refinanceOutputVals.newPayment : refinanceOutputVals.currentPayment;
     const refinanceValue = newVal - refinanceOutputVals.currentPayment;
-    document.getElementsByName("refinance-title-value")[0].innerHTML = Math.abs(refinanceValue).toFixed(2);
+    document.getElementsByName("refinance-title-value")[0].innerHTML = Math.abs(refinanceValue).toFixed(2).replace(/\B(?=(?:\d{3})+(?!\d))/g, ',');
     document.getElementsByName("refinance-title-value-sign")[0].innerHTML = Math.sign(refinanceValue) > 0 ? 'increase' : 'reduce';
 }
 

@@ -34,14 +34,14 @@ export function caclInterestAndPrincipal(loanAmount, loanTerm, interestRate){
 }
 
 export function getInitLoanComparisonValues(){
-    loanComparisonInputVals.loanAmount = document.getElementsByName("loan_amount")[0].value;
+    loanComparisonInputVals.loanAmount = document.getElementsByName("loan_amount")[0].value.replaceAll(',', '');
     loanComparisonInputVals.loanTermOption1 = document.getElementsByName("loan_term_comparison_1")[0].value;
     loanComparisonInputVals.loanTermOption2 = document.getElementsByName("loan_term_comparison_2")[0].value;
     loanComparisonInputVals.interestRateOpetion1 = document.getElementsByName("interest_rate_comparison_1")[0].value;
     loanComparisonInputVals.interestRateOpetion2 = document.getElementsByName("interest_rate_comparison_2")[0].value;
 
-    loanComparisonOutputVals.tax = document.getElementsByName("property_tax_loan_comparison")[0].value;
-    loanComparisonOutputVals.insurance = document.getElementsByName("homeowners_insurance_loan_comparison")[0].value;
+    loanComparisonOutputVals.tax = document.getElementsByName("property_tax_loan_comparison")[0].value.replaceAll(',', '');
+    loanComparisonOutputVals.insurance = document.getElementsByName("homeowners_insurance_loan_comparison")[0].value.replaceAll(',', '');
     
     calcOption1();
     calcOption2();
@@ -50,7 +50,7 @@ export function getInitLoanComparisonValues(){
 
 export function onInputLoanComparison(){
     document.getElementsByName("loan_amount")[0].addEventListener('input', () => {
-        loanComparisonInputVals.loanAmount = document.getElementsByName("loan_amount")[0].value;
+        loanComparisonInputVals.loanAmount = document.getElementsByName("loan_amount")[0].value.replaceAll(',', '');
 
         calcOption1();
         calcOption2();
@@ -110,12 +110,12 @@ export function onInputLoanComparison(){
         updateComparisonChart();
     })
     document.getElementsByName("property_tax_loan_comparison")[0].addEventListener('input', () => {
-        loanComparisonOutputVals.tax = document.getElementsByName("property_tax_loan_comparison")[0].value;
+        loanComparisonOutputVals.tax = document.getElementsByName("property_tax_loan_comparison")[0].value.replaceAll(',', '');
         updateComparisonChart();
         document.getElementsByName('comparison-tax-percent')[0].innerHTML = (100. * loanComparisonOutputVals.tax / loanComparisonInputVals.loanAmount).toFixed(2) + '%';
     })
     document.getElementsByName("homeowners_insurance_loan_comparison")[0].addEventListener('input', () => {
-        loanComparisonOutputVals.insurance = document.getElementsByName("homeowners_insurance_loan_comparison")[0].value;
+        loanComparisonOutputVals.insurance = document.getElementsByName("homeowners_insurance_loan_comparison")[0].value.replaceAll(',', '');
         updateComparisonChart();
         document.getElementsByName('comparison-insurance-percent')[0].innerHTML = (100. * loanComparisonOutputVals.insurance / loanComparisonInputVals.loanAmount).toFixed(2) + '%';
     })
@@ -208,13 +208,13 @@ var options = {
         },
         formatter: function(value, { seriesIndex, dataPointIndex, w}) {
             if (seriesIndex === 0)
-                return '$' + w.globals.stackedSeriesTotals[dataPointIndex].toFixed(2)
+                return '$' + w.globals.stackedSeriesTotals[dataPointIndex].toFixed(2).replace(/\B(?=(?:\d{3})+(?!\d))/g, ',')
         }
     },
     tooltip: {
         y: {
           formatter: function (val) {
-            return '$' + Number(val).toFixed(2)
+            return '$' + String(Number(val).toFixed(2)).replace(/\B(?=(?:\d{3})+(?!\d))/g, ',')
           },
         },
         theme: 'dark'
@@ -253,7 +253,7 @@ function createComparisonChart(){
 
 function updateComparisonChart(){
     const diff = loanComparisonOutputVals.interestOption1 + loanComparisonOutputVals.principalOption1 - loanComparisonOutputVals.interestOption2 - loanComparisonOutputVals.principalOption2;
-    document.getElementsByName('comparison-title-value')[0].innerHTML = Math.abs(diff).toFixed(2);
+    document.getElementsByName('comparison-title-value')[0].innerHTML = Math.abs(diff).toFixed(2).replace(/\B(?=(?:\d{3})+(?!\d))/g, ',');
     document.getElementsByName('comparison-title-sign')[0].innerHTML = Math.sign(diff) > 0 ? 'bigger' : 'lower';
 
     comparisonChart.destroy();

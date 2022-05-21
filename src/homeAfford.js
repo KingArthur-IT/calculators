@@ -78,7 +78,7 @@ var options = {
                 label: 'Total',
                 fontFamily: 'Riviera Nights',
                 formatter: function () {
-                    return '$ ' + getTotal()
+                    return '$ ' + String(getTotal()).replace(/\B(?=(?:\d{3})+(?!\d))/g, ',')
                 }
               },
               value: {
@@ -88,7 +88,7 @@ var options = {
                 fontWeight: 400,
                 color: '#ffffff',
                 formatter: function (val) {
-                  return '$ ' + val
+                  return '$ ' + String(Number(val).toFixed(2)).replace(/\B(?=(?:\d{3})+(?!\d))/g, ',')
                 }
               },
             },
@@ -120,7 +120,7 @@ var options = {
     tooltip: {
         y: {
             formatter: function(value) {
-              return '$' + value
+              return '$' + String(value.toFixed(2)).replace(/\B(?=(?:\d{3})+(?!\d))/g, ',')
             }
           }
     },
