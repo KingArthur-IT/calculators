@@ -154,7 +154,7 @@ var options = {
     chart: {
         type: 'bar',
         height: 300,
-        width: '100%',
+        width: 700,
         stacked: true,
     },
     plotOptions: {
@@ -240,6 +240,56 @@ var options = {
             vertical: 0
         },
     },
+    responsive: [
+        {
+          breakpoint: 1259,
+          options: {
+              chart: {
+                  width: 600,
+              },
+          }
+        },
+        {
+            breakpoint: 1100,
+            options: {
+                chart: {
+                    width: 500,
+                },
+            }
+          },
+          {
+            breakpoint: 1024,
+            options: {
+                chart: {
+                    width: 700,
+                },
+            }
+          },
+          {
+            breakpoint: 750,
+            options: {
+                chart: {
+                    width: 500,
+                },
+            }
+          },
+          {
+            breakpoint: 525,
+            options: {
+                chart: {
+                    width: 450,
+                },
+            }
+          },
+          {
+            breakpoint: 425,
+            options: {
+                chart: {
+                    width: 320,
+                },
+            }
+          }
+      ]
 };
 
 function createComparisonChart(){

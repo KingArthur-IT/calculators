@@ -129,7 +129,43 @@ var options = {
         curve: 'smooth',
         colors: '#000000',
         width: 2,    
-    }
+    },
+    responsive: [
+        {
+          breakpoint: 650,
+          options: {
+              chart: {
+                  width: 500,
+              },
+          }
+        },
+        {
+            breakpoint: 525,
+            options: {
+                chart: {
+                    width: 450,
+                },
+            }
+        },
+        {
+            breakpoint: 480,
+            options: {
+                chart: {
+                    width: '100%',
+                    height: 600,
+                },
+                  legend: {
+                      position: "bottom",
+                      fontSize: 14,
+                      offsetY: -15,
+                      itemMargin: {
+                          horizontal: 5,
+                          vertical: 5
+                      },
+                  }
+            }
+          }
+      ]
 };
 
 function getTotal(){

@@ -330,17 +330,6 @@
                 speed: 350
             }
         },
-        responsive: [
-            {
-                brakepoint: 1250,
-                options: {
-                    chart: {
-                        width: '50%'
-                    },
-                }
-            },
-            
-        ],
         series: [{ 
             name: "Monthly",
             data: Object.values(refinanceOutputVals) 
@@ -384,6 +373,58 @@
             },
             theme: 'dark'
         },
+        responsive: [
+            {
+              breakpoint: 1259,
+              options: {
+                  chart: {
+                      width: 600,
+                  },
+              }
+            },
+            {
+                breakpoint: 1100,
+                options: {
+                    chart: {
+                        width: 500,
+                    },
+                }
+              },
+              {
+                breakpoint: 1024,
+                options: {
+                    chart: {
+                        width: 700,
+                    },
+                }
+              },
+              {
+                breakpoint: 750,
+                options: {
+                    chart: {
+                        width: 500,
+                    },
+                }
+              },
+              {
+                breakpoint: 525,
+                options: {
+                    chart: {
+                        width: 400,
+                        height: 200
+                    },
+                }
+              },
+              {
+                breakpoint: 425,
+                options: {
+                    chart: {
+                        width: 300,
+                        height: 200
+                    },
+                }
+              }
+          ]
     };
 
     function createRefinanceChart(){
@@ -564,7 +605,7 @@
         chart: {
             type: 'bar',
             height: 300,
-            width: '100%',
+            width: 700,
             stacked: true,
         },
         plotOptions: {
@@ -650,6 +691,56 @@
                 vertical: 0
             },
         },
+        responsive: [
+            {
+              breakpoint: 1259,
+              options: {
+                  chart: {
+                      width: 600,
+                  },
+              }
+            },
+            {
+                breakpoint: 1100,
+                options: {
+                    chart: {
+                        width: 500,
+                    },
+                }
+              },
+              {
+                breakpoint: 1024,
+                options: {
+                    chart: {
+                        width: 700,
+                    },
+                }
+              },
+              {
+                breakpoint: 750,
+                options: {
+                    chart: {
+                        width: 500,
+                    },
+                }
+              },
+              {
+                breakpoint: 525,
+                options: {
+                    chart: {
+                        width: 450,
+                    },
+                }
+              },
+              {
+                breakpoint: 425,
+                options: {
+                    chart: {
+                        width: 320,
+                    },
+                }
+              }
+          ]
     };
 
     function createComparisonChart(){
@@ -810,7 +901,43 @@
             curve: 'smooth',
             colors: '#000000',
             width: 2,    
-        }
+        },
+        responsive: [
+            {
+              breakpoint: 650,
+              options: {
+                  chart: {
+                      width: 500,
+                  },
+              }
+            },
+            {
+                breakpoint: 525,
+                options: {
+                    chart: {
+                        width: 450,
+                    },
+                }
+            },
+            {
+                breakpoint: 480,
+                options: {
+                    chart: {
+                        width: '100%',
+                        height: 600,
+                    },
+                      legend: {
+                          position: "bottom",
+                          fontSize: 14,
+                          offsetY: -15,
+                          itemMargin: {
+                              horizontal: 5,
+                              vertical: 5
+                          },
+                      }
+                }
+              }
+          ]
     };
 
     function getTotal(){
