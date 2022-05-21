@@ -9,7 +9,7 @@ class App {
 
         getInitRefinanceValues();
         onInputRefinance();
-
+        
         getInitLoanComparisonValues();
         onInputLoanComparison();
 

@@ -38,6 +38,13 @@ export function getInitRefinanceValues(){
 }
 
 export function onInputRefinance(){
+    document.getElementsByName('calculator-btn-refinance')[0].addEventListener('click', () => {
+        //updateRefinanceChart();
+        refinanceChart.destroy();
+        setTimeout(() => {
+            createRefinanceChart();
+        }, 170);
+    })
     document.getElementsByName("remaining_balance")[0].addEventListener('input', () => {
         refinanceInputVals.remainingBalance = document.getElementsByName("remaining_balance")[0].value.replaceAll(',', '');
         refinanceOutputVals.newPayment = caclRefinance(refinanceInputVals.remainingBalance, refinanceInputVals.closingCosts, refinanceInputVals.newLoanTerm, refinanceInputVals.interestRateNew).toFixed(2);
@@ -126,7 +133,7 @@ var options = {
     chart: {
         type: 'bar',
         height: 300,
-        width: 700
+        width: '100%'
     },
     plotOptions: {
         bar: {
@@ -236,8 +243,9 @@ function updateRefinanceChart(seriesName = 'Monthly'){
     options.series[0].name = seriesName;
 
     refinanceChart.destroy();
-    refinanceChart = new ApexCharts(refinanceElement, options);
-    refinanceChart.render();
+    createRefinanceChart();
+    // refinanceChart = new ApexCharts(refinanceElement, options);
+    // refinanceChart.render();
 
     const newVal = isFinite(refinanceOutputVals.newPayment) ? refinanceOutputVals.newPayment : refinanceOutputVals.currentPayment;
     const refinanceValue = newVal - refinanceOutputVals.currentPayment;

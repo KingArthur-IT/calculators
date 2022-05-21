@@ -76,16 +76,16 @@
             <div class="calculator__container"> 
               <div class="calculator-tabs__buttons"> 
                 <div class="calculator-btn-wrapp">
-                  <button class="calculator-tab__btn active" type="button" data-tab="first"><span>Mortgage Payment Calculator</span></button>
+                  <button class="calculator-tab__btn active" type="button" data-tab="first" name="calculator-btn-mortgage"><span>Mortgage Payment Calculator</span></button>
                 </div>
                 <div class="calculator-btn-wrapp">
-                  <button class="calculator-tab__btn" type="button" data-tab="second"><span>Refinance Calculator</span></button>
+                  <button class="calculator-tab__btn" type="button" data-tab="second" name="calculator-btn-refinance"><span>Refinance Calculator</span></button>
                 </div>
                 <div class="calculator-btn-wrapp">
-                  <button class="calculator-tab__btn" type="button" data-tab="third"><span>Loan Comparison</span></button>
+                  <button class="calculator-tab__btn" type="button" data-tab="third" name="calculator-btn-comparison"><span>Loan Comparison</span></button>
                 </div>
                 <div class="calculator-btn-wrapp">
-                  <button class="calculator-tab__btn" type="button" data-tab="fourth"><span>Home Affordability</span></button>
+                  <button class="calculator-tab__btn" type="button" data-tab="fourth" name="calculator-btn-home"><span>Home Affordability</span></button>
                 </div>
               </div>
               <div class="calculator-tabs__content"> 
@@ -764,6 +764,10 @@
     justify-content: space-around !important;
   }
 }
+#comparison-chart,
+#refinance-chart,
+#home-afford-chart
+{ width: 100%;}
     </style>
     <script src="assets/js/app.js?v=580"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>

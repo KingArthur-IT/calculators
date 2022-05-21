@@ -1,7 +1,5 @@
 import ApexCharts from 'apexcharts';
 
-//<input class="global-input calculator-input" type="text" name="property_tax" value="100" >
-//oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/\B(?=(?:\d{3})+(?!\d))/g, ',');"
 const MONTHES = 12.;
 const mortgageElement = document.querySelector("#mortgage-chart");
 var mortgageChart;
@@ -41,6 +39,14 @@ export function getInitMortageValues(){
 }
 
 export function onInputMortage(){
+    document.getElementsByName('calculator-btn-mortgage')[0].addEventListener('click', () => {
+        mortgageChart.destroy();
+        //createMortageChart();
+        setTimeout(() => {
+            //updateMortageChart();
+            createMortageChart();
+        }, 170);
+    })
     document.getElementsByName("home_price")[0].addEventListener('input', () => {
         mortgageInputVals.homePrice = document.getElementsByName("home_price")[0].value.replaceAll(',', '');
         mortageOutputVals.principalAndInterest = caclMortgage(mortgageInputVals.homePrice, mortgageInputVals.downPayment, mortgageInputVals.loanTerm, mortgageInputVals.interestRate).toFixed(2);
@@ -250,5 +256,4 @@ function createMortageChart(){
 function updateMortageChart(){
     mortgageChart.destroy();
     createMortageChart();
-
 }

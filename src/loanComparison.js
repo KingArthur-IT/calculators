@@ -49,6 +49,13 @@ export function getInitLoanComparisonValues(){
 }
 
 export function onInputLoanComparison(){
+    document.getElementsByName('calculator-btn-comparison')[0].addEventListener('click', () => {
+        comparisonChart.destroy();
+        setTimeout(() => {
+            //updateComparisonChart();
+            createComparisonChart()
+        }, 170);
+    })
     document.getElementsByName("loan_amount")[0].addEventListener('input', () => {
         loanComparisonInputVals.loanAmount = document.getElementsByName("loan_amount")[0].value.replaceAll(',', '');
 
@@ -64,8 +71,14 @@ export function onInputLoanComparison(){
             document.getElementsByName("homeowners_insurance_loan_comparison")[0].value = loanComparisonInputVals.loanAmount.replace(/\B(?=(?:\d{3})+(?!\d))/g, ',')
         }
 
-        document.getElementsByName('comparison-insurance-percent')[0].innerHTML = (100. * loanComparisonOutputVals.insurance / loanComparisonInputVals.loanAmount).toFixed(2) + '%';
-        document.getElementsByName('comparison-tax-percent')[0].innerHTML = (100. * loanComparisonOutputVals.tax / loanComparisonInputVals.loanAmount).toFixed(2) + '%';
+        if (loanComparisonInputVals.loanAmount > 0){
+            document.getElementsByName('comparison-insurance-percent')[0].innerHTML = (100. * loanComparisonOutputVals.insurance / loanComparisonInputVals.loanAmount).toFixed(2) + '%';
+            document.getElementsByName('comparison-tax-percent')[0].innerHTML = (100. * loanComparisonOutputVals.tax / loanComparisonInputVals.loanAmount).toFixed(2) + '%';
+        }
+        else {
+            document.getElementsByName('comparison-insurance-percent')[0].innerHTML = '100%';
+            document.getElementsByName('comparison-tax-percent')[0].innerHTML = '100%';
+        }
         updateComparisonChart();
     })
     document.getElementsByName("loan_term_comparison_1")[0].addEventListener('input', () => {
@@ -171,7 +184,7 @@ var options = {
     chart: {
         type: 'bar',
         height: 300,
-        width: 700,
+        width: '100%',
         stacked: true,
     },
     plotOptions: {
@@ -363,11 +376,4 @@ function calcOption2(){
     const option2 = caclInterestAndPrincipal(loanComparisonInputVals.loanAmount, loanComparisonInputVals.loanTermOption2, loanComparisonInputVals.interestRateOpetion2);
     loanComparisonOutputVals.interestOption2 = option2.interest;
     loanComparisonOutputVals.principalOption2 = option2.principal;
-}
-function getTotal(seriesName){
-    const name = String(seriesName);
-    const i = name[name.length-1];
-    const constVals = loanComparisonOutputVals.insurance + loanComparisonOutputVals.tax;
-    const p = loanComparisonOutputVals['interestOption' + i] + loanComparisonOutputVals['principalOption' + i]
-    return Number(p + constVals).toFixed(2)
 }

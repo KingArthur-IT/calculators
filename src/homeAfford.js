@@ -14,6 +14,13 @@ export function getInitHomeAfforfdValues(){
 }
 
 export function onInputHomeAfford(){
+    document.getElementsByName('calculator-btn-home')[0].addEventListener('click', () => {
+        //updateHomeAffordChart()
+        homeAffordChart.destroy();
+        setTimeout(() => {
+            createHomeAffordChart();
+        }, 170);
+    })
     document.getElementsByName("home_annual_income")[0].addEventListener('input', () => {
         updateHomeAffordChart();
     })
@@ -54,7 +61,8 @@ var options = {
     labels: ['P&I', 'Taxes', 'Insurance'],
     chart: {
         type: 'donut',
-        width: 700
+        width: '100%',
+        height: 600
     },
     plotOptions: {
         pie: {
@@ -102,7 +110,7 @@ var options = {
             offsetY: 2
         },
         itemMargin: {
-            horizontal: 10,
+            horizontal: 0,
             vertical: 10
         },
     },

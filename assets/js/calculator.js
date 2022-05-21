@@ -25,8 +25,6 @@
 
     var ApexCharts$1 = apexcharts_common.exports;
 
-    //<input class="global-input calculator-input" type="text" name="property_tax" value="100" >
-    //oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/\B(?=(?:\d{3})+(?!\d))/g, ',');"
     const MONTHES$2 = 12.;
     const mortgageElement = document.querySelector("#mortgage-chart");
     var mortgageChart;
@@ -66,6 +64,14 @@
     }
 
     function onInputMortage(){
+        document.getElementsByName('calculator-btn-mortgage')[0].addEventListener('click', () => {
+            mortgageChart.destroy();
+            //createMortageChart();
+            setTimeout(() => {
+                //updateMortageChart();
+                createMortageChart();
+            }, 170);
+        });
         document.getElementsByName("home_price")[0].addEventListener('input', () => {
             mortgageInputVals.homePrice = document.getElementsByName("home_price")[0].value.replaceAll(',', '');
             mortageOutputVals.principalAndInterest = caclMortgage(mortgageInputVals.homePrice, mortgageInputVals.downPayment, mortgageInputVals.loanTerm, mortgageInputVals.interestRate).toFixed(2);
@@ -271,7 +277,6 @@
     function updateMortageChart(){
         mortgageChart.destroy();
         createMortageChart();
-
     }
 
     const MONTHES$1 = 12.;
@@ -312,6 +317,13 @@
     }
 
     function onInputRefinance(){
+        document.getElementsByName('calculator-btn-refinance')[0].addEventListener('click', () => {
+            //updateRefinanceChart();
+            refinanceChart.destroy();
+            setTimeout(() => {
+                createRefinanceChart();
+            }, 170);
+        });
         document.getElementsByName("remaining_balance")[0].addEventListener('input', () => {
             refinanceInputVals.remainingBalance = document.getElementsByName("remaining_balance")[0].value.replaceAll(',', '');
             refinanceOutputVals.newPayment = caclRefinance(refinanceInputVals.remainingBalance, refinanceInputVals.closingCosts, refinanceInputVals.newLoanTerm, refinanceInputVals.interestRateNew).toFixed(2);
@@ -396,7 +408,7 @@
         chart: {
             type: 'bar',
             height: 300,
-            width: 700
+            width: '100%'
         },
         plotOptions: {
             bar: {
@@ -506,8 +518,9 @@
         options$2.series[0].name = seriesName;
 
         refinanceChart.destroy();
-        refinanceChart = new ApexCharts$1(refinanceElement, options$2);
-        refinanceChart.render();
+        createRefinanceChart();
+        // refinanceChart = new ApexCharts(refinanceElement, options);
+        // refinanceChart.render();
 
         const newVal = isFinite(refinanceOutputVals.newPayment) ? refinanceOutputVals.newPayment : refinanceOutputVals.currentPayment;
         const refinanceValue = newVal - refinanceOutputVals.currentPayment;
@@ -570,6 +583,13 @@
     }
 
     function onInputLoanComparison(){
+        document.getElementsByName('calculator-btn-comparison')[0].addEventListener('click', () => {
+            comparisonChart.destroy();
+            setTimeout(() => {
+                //updateComparisonChart();
+                createComparisonChart();
+            }, 170);
+        });
         document.getElementsByName("loan_amount")[0].addEventListener('input', () => {
             loanComparisonInputVals.loanAmount = document.getElementsByName("loan_amount")[0].value.replaceAll(',', '');
 
@@ -585,8 +605,14 @@
                 document.getElementsByName("homeowners_insurance_loan_comparison")[0].value = loanComparisonInputVals.loanAmount.replace(/\B(?=(?:\d{3})+(?!\d))/g, ',');
             }
 
-            document.getElementsByName('comparison-insurance-percent')[0].innerHTML = (100. * loanComparisonOutputVals.insurance / loanComparisonInputVals.loanAmount).toFixed(2) + '%';
-            document.getElementsByName('comparison-tax-percent')[0].innerHTML = (100. * loanComparisonOutputVals.tax / loanComparisonInputVals.loanAmount).toFixed(2) + '%';
+            if (loanComparisonInputVals.loanAmount > 0){
+                document.getElementsByName('comparison-insurance-percent')[0].innerHTML = (100. * loanComparisonOutputVals.insurance / loanComparisonInputVals.loanAmount).toFixed(2) + '%';
+                document.getElementsByName('comparison-tax-percent')[0].innerHTML = (100. * loanComparisonOutputVals.tax / loanComparisonInputVals.loanAmount).toFixed(2) + '%';
+            }
+            else {
+                document.getElementsByName('comparison-insurance-percent')[0].innerHTML = '100%';
+                document.getElementsByName('comparison-tax-percent')[0].innerHTML = '100%';
+            }
             updateComparisonChart();
         });
         document.getElementsByName("loan_term_comparison_1")[0].addEventListener('input', () => {
@@ -688,7 +714,7 @@
         chart: {
             type: 'bar',
             height: 300,
-            width: 700,
+            width: '100%',
             stacked: true,
         },
         plotOptions: {
@@ -896,6 +922,13 @@
     }
 
     function onInputHomeAfford(){
+        document.getElementsByName('calculator-btn-home')[0].addEventListener('click', () => {
+            //updateHomeAffordChart()
+            homeAffordChart.destroy();
+            setTimeout(() => {
+                createHomeAffordChart();
+            }, 170);
+        });
         document.getElementsByName("home_annual_income")[0].addEventListener('input', () => {
             updateHomeAffordChart();
         });
@@ -936,7 +969,8 @@
         labels: ['P&I', 'Taxes', 'Insurance'],
         chart: {
             type: 'donut',
-            width: 700
+            width: '100%',
+            height: 600
         },
         plotOptions: {
             pie: {
@@ -984,7 +1018,7 @@
                 offsetY: 2
             },
             itemMargin: {
-                horizontal: 10,
+                horizontal: 0,
                 vertical: 10
             },
         },
@@ -1094,7 +1128,7 @@
 
             getInitRefinanceValues();
             onInputRefinance();
-
+            
             getInitLoanComparisonValues();
             onInputLoanComparison();
 
