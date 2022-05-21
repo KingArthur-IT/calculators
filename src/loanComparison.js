@@ -275,7 +275,7 @@ var options = {
           breakpoint: 1259,
           options: {
               chart: {
-                  width: 600,
+                  width: '100%',
               },
           }
         },
@@ -283,32 +283,8 @@ var options = {
             breakpoint: 1100,
             options: {
                 chart: {
-                    width: 500,
+                    width: '100%',
                     height: 300
-                },
-            }
-          },
-          {
-            breakpoint: 1024,
-            options: {
-                chart: {
-                    width: 700,
-                },
-            }
-          },
-          {
-            breakpoint: 750,
-            options: {
-                chart: {
-                    width: 600,
-                },
-            }
-          },
-          {
-            breakpoint: 625,
-            options: {
-                chart: {
-                    width: 500,
                 },
             }
           },
@@ -316,7 +292,7 @@ var options = {
             breakpoint: 525,
             options: {
                 chart: {
-                    width: 450,
+                    width: '100%',
                     height: 250
                 },
             }
@@ -325,28 +301,12 @@ var options = {
             breakpoint: 475,
             options: {
                 chart: {
-                    width: 400,
+                    width: '100%',
                     height: 200
                 },
             }
           },
-          {
-            breakpoint: 400,
-            options: {
-                chart: {
-                    width: 350,
-                },
-            }
-          },
-          {
-            breakpoint: 360,
-            options: {
-                chart: {
-                    width: 300,
-                },
-            }
-          }
-      ]
+    ]
 };
 
 function createComparisonChart(){

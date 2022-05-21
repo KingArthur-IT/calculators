@@ -49,7 +49,6 @@ export function onInputMortage(){
     })
     document.getElementsByName("home_price")[0].addEventListener('input', () => {
         mortgageInputVals.homePrice = document.getElementsByName("home_price")[0].value.replaceAll(',', '');
-        mortageOutputVals.principalAndInterest = caclMortgage(mortgageInputVals.homePrice, mortgageInputVals.downPayment, mortgageInputVals.loanTerm, mortgageInputVals.interestRate).toFixed(2);
         
         if (Number(mortgageInputVals.downPayment) > Number(mortgageInputVals.homePrice)){
             mortgageInputVals.downPayment = mortgageInputVals.homePrice;
@@ -59,14 +58,7 @@ export function onInputMortage(){
             mortageOutputVals.taxes = mortgageInputVals.homePrice;
             document.getElementsByName("property_tax")[0].value = mortgageInputVals.homePrice.replace(/\B(?=(?:\d{3})+(?!\d))/g, ',');
         }
-        if (Number(mortageOutputVals.insurance) > Number(mortgageInputVals.homePrice)){
-            mortageOutputVals.insurance = mortgageInputVals.homePrice;
-            document.getElementsByName("home_insurance")[0].value = mortgageInputVals.homePrice.replace(/\B(?=(?:\d{3})+(?!\d))/g, ',');
-        }
-        if (Number(mortageOutputVals.HOA) > Number(mortgageInputVals.homePrice)){
-            mortageOutputVals.HOA = mortgageInputVals.homePrice;
-            document.getElementsByName("HOA_dues")[0].value = mortgageInputVals.homePrice.replace(/\B(?=(?:\d{3})+(?!\d))/g, ',');
-        }
+        
         if (mortgageInputVals.homePrice > 0){
             document.getElementsByName("mortgage_down_payment_percent")[0].innerHTML = (100. * mortgageInputVals.downPayment / mortgageInputVals.homePrice).toFixed(2) + '%';
             document.getElementsByName("mortgage_tax_percent")[0].innerHTML = (100. * mortageOutputVals.taxes / mortgageInputVals.homePrice).toFixed(2) + '%';
@@ -75,13 +67,12 @@ export function onInputMortage(){
             document.getElementsByName("mortgage_down_payment_percent")[0].innerHTML = '100%';
             document.getElementsByName("mortgage_tax_percent")[0].innerHTML = '100%';
         }
+        mortageOutputVals.principalAndInterest = caclMortgage(mortgageInputVals.homePrice, mortgageInputVals.downPayment, mortgageInputVals.loanTerm, mortgageInputVals.interestRate).toFixed(2);
         updateMortageChart();
     })
     document.getElementsByName("down_payment")[0].addEventListener('input', () => {
         mortgageInputVals.downPayment = document.getElementsByName("down_payment")[0].value.replaceAll(',', '');
-        mortageOutputVals.principalAndInterest = caclMortgage(mortgageInputVals.homePrice, mortgageInputVals.downPayment, mortgageInputVals.loanTerm, mortgageInputVals.interestRate).toFixed(2);
         
-        console.log(mortgageInputVals.downPayment, mortgageInputVals.homePrice)
         if (1. * mortgageInputVals.downPayment > 1. * mortgageInputVals.homePrice){
             mortgageInputVals.downPayment = mortgageInputVals.homePrice;
             document.getElementsByName("down_payment")[0].value = mortgageInputVals.downPayment.replace(/\B(?=(?:\d{3})+(?!\d))/g, ',');
@@ -94,6 +85,8 @@ export function onInputMortage(){
         if (mortgageInputVals.homePrice > 0)
             document.getElementsByName("mortgage_down_payment_percent")[0].innerHTML = (100. * mortgageInputVals.downPayment / mortgageInputVals.homePrice).toFixed(2) + '%';
         else document.getElementsByName("mortgage_down_payment_percent")[0].innerHTML = '100%';
+        
+        mortageOutputVals.principalAndInterest = caclMortgage(mortgageInputVals.homePrice, mortgageInputVals.downPayment, mortgageInputVals.loanTerm, mortgageInputVals.interestRate).toFixed(2);
         updateMortageChart();
     })
     document.getElementsByName("loan_term")[0].addEventListener('input', () => {
@@ -130,18 +123,10 @@ export function onInputMortage(){
     })
     document.getElementsByName("home_insurance")[0].addEventListener('input', () => {
         mortageOutputVals.insurance = document.getElementsByName("home_insurance")[0].value.replaceAll(',', '');
-        if (Number(mortageOutputVals.insurance) > Number(mortgageInputVals.homePrice)){
-            mortageOutputVals.insurance = mortgageInputVals.homePrice;
-            document.getElementsByName("home_insurance")[0].value = mortgageInputVals.homePrice.replace(/\B(?=(?:\d{3})+(?!\d))/g, ',');
-        }
         updateMortageChart();
     })
     document.getElementsByName("HOA_dues")[0].addEventListener('input', () => {
         mortageOutputVals.HOA = document.getElementsByName("HOA_dues")[0].value.replaceAll(',', '');
-        if (Number(mortageOutputVals.HOA) > Number(mortgageInputVals.homePrice)){
-            mortageOutputVals.HOA = mortgageInputVals.homePrice;
-            document.getElementsByName("HOA_dues")[0].value = mortgageInputVals.homePrice.replace(/\B(?=(?:\d{3})+(?!\d))/g, ',');
-        }
         updateMortageChart();
     })
 }

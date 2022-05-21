@@ -140,31 +140,7 @@ var options = {
             breakpoint: 1025,
             options: {
                 chart: {
-                    width: 700,
-                },
-            }
-          },
-          {
-            breakpoint: 750,
-            options: {
-                chart: {
-                    width: 600,
-                },
-            }
-          },
-        {
-          breakpoint: 650,
-          options: {
-              chart: {
-                  width: 500,
-              },
-          }
-        },
-        {
-            breakpoint: 525,
-            options: {
-                chart: {
-                    width: 450,
+                    width: '100%',
                 },
             }
         },
