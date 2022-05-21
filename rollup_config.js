@@ -7,7 +7,7 @@ export default {
 		{
 			format: 'umd',
 			name: 'MYAPP',
-			file: 'build/bundle.js'
+			file: 'assets/js/calculator.js'
 		}
 	],
 	plugins: [ resolve(), commonjs({
