@@ -53,20 +53,8 @@ var options = {
     series: Object.values(homeAffordOutputVals),
     labels: ['P&I', 'Taxes', 'Insurance'],
     chart: {
-        type: 'donut',
-        width: 600,
+        type: 'donut'
     },
-    responsive: [{
-        brakepoint: 2000,
-        options: {
-            chart: {
-                width: 600
-            },
-            legend: {
-                position: 'left'
-            }
-        }
-    }],
     plotOptions: {
         pie: {
           donut: {

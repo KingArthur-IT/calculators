@@ -158,6 +158,7 @@ var options = {
             options: {
                 chart: {
                     width: 500,
+                    height: 300
                 },
             }
           },
@@ -173,6 +174,14 @@ var options = {
             breakpoint: 750,
             options: {
                 chart: {
+                    width: 600,
+                },
+            }
+          },
+          {
+            breakpoint: 625,
+            options: {
+                chart: {
                     width: 500,
                 },
             }
@@ -181,17 +190,33 @@ var options = {
             breakpoint: 525,
             options: {
                 chart: {
+                    width: 450,
+                    height: 250
+                },
+            }
+          },
+          {
+            breakpoint: 475,
+            options: {
+                chart: {
                     width: 400,
                     height: 200
                 },
             }
           },
           {
-            breakpoint: 425,
+            breakpoint: 400,
+            options: {
+                chart: {
+                    width: 350,
+                },
+            }
+          },
+          {
+            breakpoint: 360,
             options: {
                 chart: {
                     width: 300,
-                    height: 200
                 },
             }
           }

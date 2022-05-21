@@ -179,17 +179,17 @@ var options = {
               chart: {
                   width: '100%',
                   height: 600,
-              },
+               },
                 legend: {
                     position: "bottom",
                     fontSize: 14,
-                    offsetY: -15,
+                    offsetY: 0,
                     itemMargin: {
                         horizontal: 5,
                         vertical: 5
                     },
-                }
-          }
+                },
+            }
         }
       ]
 };

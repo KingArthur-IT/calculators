@@ -207,7 +207,8 @@ var options = {
           colors: ["#ffffff"]
         },
         formatter: function(value, { seriesIndex, dataPointIndex, w}) {
-            if (seriesIndex === 0)
+            //console.log(w.globals.seriesPercent)
+            if (seriesIndex === 0 && value > 0)
                 return '$' + w.globals.stackedSeriesTotals[dataPointIndex].toFixed(2).replace(/\B(?=(?:\d{3})+(?!\d))/g, ',')
         }
     },
@@ -254,6 +255,7 @@ var options = {
             options: {
                 chart: {
                     width: 500,
+                    height: 300
                 },
             }
           },
@@ -269,6 +271,14 @@ var options = {
             breakpoint: 750,
             options: {
                 chart: {
+                    width: 600,
+                },
+            }
+          },
+          {
+            breakpoint: 625,
+            options: {
+                chart: {
                     width: 500,
                 },
             }
@@ -278,14 +288,32 @@ var options = {
             options: {
                 chart: {
                     width: 450,
+                    height: 250
                 },
             }
           },
           {
-            breakpoint: 425,
+            breakpoint: 475,
             options: {
                 chart: {
-                    width: 320,
+                    width: 400,
+                    height: 200
+                },
+            }
+          },
+          {
+            breakpoint: 400,
+            options: {
+                chart: {
+                    width: 350,
+                },
+            }
+          },
+          {
+            breakpoint: 360,
+            options: {
+                chart: {
+                    width: 300,
                 },
             }
           }

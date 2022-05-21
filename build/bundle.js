@@ -200,17 +200,17 @@
                   chart: {
                       width: '100%',
                       height: 600,
-                  },
+                   },
                     legend: {
                         position: "bottom",
                         fontSize: 14,
-                        offsetY: -15,
+                        offsetY: 0,
                         itemMargin: {
                             horizontal: 5,
                             vertical: 5
                         },
-                    }
-              }
+                    },
+                }
             }
           ]
     };
@@ -387,6 +387,7 @@
                 options: {
                     chart: {
                         width: 500,
+                        height: 300
                     },
                 }
               },
@@ -402,6 +403,14 @@
                 breakpoint: 750,
                 options: {
                     chart: {
+                        width: 600,
+                    },
+                }
+              },
+              {
+                breakpoint: 625,
+                options: {
+                    chart: {
                         width: 500,
                     },
                 }
@@ -410,17 +419,33 @@
                 breakpoint: 525,
                 options: {
                     chart: {
+                        width: 450,
+                        height: 250
+                    },
+                }
+              },
+              {
+                breakpoint: 475,
+                options: {
+                    chart: {
                         width: 400,
                         height: 200
                     },
                 }
               },
               {
-                breakpoint: 425,
+                breakpoint: 400,
+                options: {
+                    chart: {
+                        width: 350,
+                    },
+                }
+              },
+              {
+                breakpoint: 360,
                 options: {
                     chart: {
                         width: 300,
-                        height: 200
                     },
                 }
               }
@@ -658,7 +683,8 @@
               colors: ["#ffffff"]
             },
             formatter: function(value, { seriesIndex, dataPointIndex, w}) {
-                if (seriesIndex === 0)
+                //console.log(w.globals.seriesPercent)
+                if (seriesIndex === 0 && value > 0)
                     return '$' + w.globals.stackedSeriesTotals[dataPointIndex].toFixed(2).replace(/\B(?=(?:\d{3})+(?!\d))/g, ',')
             }
         },
@@ -705,6 +731,7 @@
                 options: {
                     chart: {
                         width: 500,
+                        height: 300
                     },
                 }
               },
@@ -720,6 +747,14 @@
                 breakpoint: 750,
                 options: {
                     chart: {
+                        width: 600,
+                    },
+                }
+              },
+              {
+                breakpoint: 625,
+                options: {
+                    chart: {
                         width: 500,
                     },
                 }
@@ -729,14 +764,32 @@
                 options: {
                     chart: {
                         width: 450,
+                        height: 250
                     },
                 }
               },
               {
-                breakpoint: 425,
+                breakpoint: 475,
                 options: {
                     chart: {
-                        width: 320,
+                        width: 400,
+                        height: 200
+                    },
+                }
+              },
+              {
+                breakpoint: 400,
+                options: {
+                    chart: {
+                        width: 350,
+                    },
+                }
+              },
+              {
+                breakpoint: 360,
+                options: {
+                    chart: {
+                        width: 300,
                     },
                 }
               }
@@ -825,20 +878,8 @@
         series: Object.values(homeAffordOutputVals),
         labels: ['P&I', 'Taxes', 'Insurance'],
         chart: {
-            type: 'donut',
-            width: 600,
+            type: 'donut'
         },
-        responsive: [{
-            brakepoint: 2000,
-            options: {
-                chart: {
-                    width: 600
-                },
-                legend: {
-                    position: 'left'
-                }
-            }
-        }],
         plotOptions: {
             pie: {
               donut: {
