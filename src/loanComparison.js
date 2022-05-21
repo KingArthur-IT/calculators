@@ -54,11 +54,19 @@ export function onInputLoanComparison(){
 
         calcOption1();
         calcOption2();
-        
-        updateComparisonChart();
+
+        if (Number(loanComparisonOutputVals.tax) > Number(loanComparisonInputVals.loanAmount)){
+            loanComparisonOutputVals.tax = loanComparisonInputVals.loanAmount;
+            document.getElementsByName("property_tax_loan_comparison")[0].value = loanComparisonInputVals.loanAmount.replace(/\B(?=(?:\d{3})+(?!\d))/g, ',')
+        }
+        if (Number(loanComparisonOutputVals.insurance) > Number(loanComparisonInputVals.loanAmount)){
+            loanComparisonOutputVals.insurance = loanComparisonInputVals.loanAmount;
+            document.getElementsByName("homeowners_insurance_loan_comparison")[0].value = loanComparisonInputVals.loanAmount.replace(/\B(?=(?:\d{3})+(?!\d))/g, ',')
+        }
 
         document.getElementsByName('comparison-insurance-percent')[0].innerHTML = (100. * loanComparisonOutputVals.insurance / loanComparisonInputVals.loanAmount).toFixed(2) + '%';
         document.getElementsByName('comparison-tax-percent')[0].innerHTML = (100. * loanComparisonOutputVals.tax / loanComparisonInputVals.loanAmount).toFixed(2) + '%';
+        updateComparisonChart();
     })
     document.getElementsByName("loan_term_comparison_1")[0].addEventListener('input', () => {
         loanComparisonInputVals.loanTermOption1 = document.getElementsByName("loan_term_comparison_1")[0].value;
@@ -111,13 +119,22 @@ export function onInputLoanComparison(){
     })
     document.getElementsByName("property_tax_loan_comparison")[0].addEventListener('input', () => {
         loanComparisonOutputVals.tax = document.getElementsByName("property_tax_loan_comparison")[0].value.replaceAll(',', '');
-        updateComparisonChart();
+
+        if (Number(loanComparisonOutputVals.tax) > Number(loanComparisonInputVals.loanAmount)){
+            loanComparisonOutputVals.tax = loanComparisonInputVals.loanAmount;
+            document.getElementsByName("property_tax_loan_comparison")[0].value = loanComparisonInputVals.loanAmount.replace(/\B(?=(?:\d{3})+(?!\d))/g, ',')
+        }
         document.getElementsByName('comparison-tax-percent')[0].innerHTML = (100. * loanComparisonOutputVals.tax / loanComparisonInputVals.loanAmount).toFixed(2) + '%';
+        updateComparisonChart();
     })
     document.getElementsByName("homeowners_insurance_loan_comparison")[0].addEventListener('input', () => {
         loanComparisonOutputVals.insurance = document.getElementsByName("homeowners_insurance_loan_comparison")[0].value.replaceAll(',', '');
-        updateComparisonChart();
+        if (Number(loanComparisonOutputVals.insurance) > Number(loanComparisonInputVals.loanAmount)){
+            loanComparisonOutputVals.insurance = loanComparisonInputVals.loanAmount;
+            document.getElementsByName("homeowners_insurance_loan_comparison")[0].value = loanComparisonInputVals.loanAmount.replace(/\B(?=(?:\d{3})+(?!\d))/g, ',')
+        }
         document.getElementsByName('comparison-insurance-percent')[0].innerHTML = (100. * loanComparisonOutputVals.insurance / loanComparisonInputVals.loanAmount).toFixed(2) + '%';
+        updateComparisonChart();
     })
     document.getElementsByName('comparison-btn-balance')[0].addEventListener('click', () => {
         updateComparisonChart();
@@ -207,7 +224,6 @@ var options = {
           colors: ["#ffffff"]
         },
         formatter: function(value, { seriesIndex, dataPointIndex, w}) {
-            //console.log(w.globals.seriesPercent)
             if (seriesIndex === 0 && value > 0)
                 return '$' + w.globals.stackedSeriesTotals[dataPointIndex].toFixed(2).replace(/\B(?=(?:\d{3})+(?!\d))/g, ',')
         }
