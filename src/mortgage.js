@@ -109,17 +109,6 @@ var options = {
     chart: {
         type: 'donut',
     },
-    responsive: [{
-        brakepoint: 2000,
-        options: {
-            chart: {
-                width: 600
-            },
-            legend: {
-                position: 'left'
-            }
-        }
-    }],
     plotOptions: {
         pie: {
           donut: {
@@ -182,7 +171,27 @@ var options = {
         curve: 'smooth',
         colors: '#000000',
         width: 2,    
-    }
+    },
+    responsive: [
+        {
+          breakpoint: 480,
+          options: {
+              chart: {
+                  width: '100%',
+                  height: 600,
+              },
+                legend: {
+                    position: "bottom",
+                    fontSize: 14,
+                    offsetY: -15,
+                    itemMargin: {
+                        horizontal: 5,
+                        vertical: 5
+                    },
+                }
+          }
+        }
+      ]
 };
 
 function getTotal(){

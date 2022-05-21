@@ -154,7 +154,7 @@ var options = {
     chart: {
         type: 'bar',
         height: 300,
-        width: 800,
+        width: '100%',
         stacked: true,
     },
     plotOptions: {

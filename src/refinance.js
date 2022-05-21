@@ -101,6 +101,17 @@ var options = {
             speed: 350
         }
     },
+    responsive: [
+        {
+            brakepoint: 1250,
+            options: {
+                chart: {
+                    width: '50%'
+                },
+            }
+        },
+        
+    ],
     series: [{ 
         name: "Monthly",
         data: Object.values(refinanceOutputVals) 
