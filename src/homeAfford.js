@@ -1,7 +1,20 @@
 import ApexCharts from 'apexcharts';
 
+const MONTHES = 12.;
 const homeAffordElement = document.querySelector("#home-afford-chart");
 var homeAffordChart;
+
+var homeAffordInputVals = {
+    annualIncome: 700000,
+    downPayment: 20000,
+    loanTerm: 5,
+    monthlyDebts: 500,
+    interestRate: 3.6,
+    debtToIncome: 36,
+    taxes: 100,
+    insurance: 100,
+    HOADues: 0
+}
 
 var homeAffordOutputVals = {
     PAndI: 0,
@@ -10,7 +23,26 @@ var homeAffordOutputVals = {
 }
 
 export function getInitHomeAfforfdValues(){
+    homeAffordInputVals.annualIncome = document.getElementsByName('home_annual_income')[0].value.replaceAll(',', '');
+    homeAffordInputVals.downPayment = document.getElementsByName('home_down_payment')[0].value.replaceAll(',', '');
+    homeAffordInputVals.monthlyDebts = document.getElementsByName('home_monthly_debts')[0].value.replaceAll(',', '');
+    homeAffordInputVals.loanTerm = document.getElementsByName('home_loan_term')[0].value.replaceAll(',', '');
+    homeAffordInputVals.interestRate = document.getElementsByName('home_interest_rate')[0].value.replaceAll(',', '');
+
+    homeAffordInputVals.debtToIncome = document.getElementsByName('home-debt-to-income')[0].value.replaceAll(',', '');
+    homeAffordInputVals.insurance = document.getElementsByName('home_insurance')[0].value.replaceAll(',', '');
+    homeAffordInputVals.taxes = document.getElementsByName('home_property_tax')[0].value.replaceAll(',', '');
+    homeAffordInputVals.HOADues = document.getElementsByName('home_HOA_dues')[0].value.replaceAll(',', '');
+    
     createHomeAffordChart();
+}
+
+function caclHomeAfford(monthly, downPayment, loanTerm, interestRate){
+    const i = 1. * interestRate / (100.0 * MONTHES),
+          n = loanTerm * MONTHES,
+          intermediateVal = Math.pow(i + 1, n),
+          k = 1. * i * intermediateVal / (intermediateVal - 1.);
+    return 1. * downPayment + 1. * monthly / k 
 }
 
 export function onInputHomeAfford(){
@@ -22,36 +54,87 @@ export function onInputHomeAfford(){
         }, 170);
     })
     document.getElementsByName("home_annual_income")[0].addEventListener('input', () => {
+        homeAffordInputVals.annualIncome = document.getElementsByName('home_annual_income')[0].value.replaceAll(',', '');
+
+        if (Number(homeAffordInputVals.downPayment) > Number(homeAffordInputVals.annualIncome)){
+            homeAffordInputVals.downPayment = homeAffordInputVals.annualIncome;
+            document.getElementsByName("home_down_payment")[0].value = homeAffordInputVals.downPayment.replace(/\B(?=(?:\d{3})+(?!\d))/g, ',');
+        }
+        if (Number(homeAffordInputVals.insurance) > Number(homeAffordInputVals.annualIncome)){
+            homeAffordInputVals.insurance = homeAffordInputVals.annualIncome;
+            document.getElementsByName("home_afford_insurance")[0].value = homeAffordInputVals.insurance.replace(/\B(?=(?:\d{3})+(?!\d))/g, ',');
+        }
+
+        calculateMonthlyDepth();
+
+        if (Number(homeAffordInputVals.monthlyDebts) > Number(homeAffordInputVals.annualIncome)){
+            homeAffordInputVals.monthlyDebts = homeAffordInputVals.annualIncome;
+            document.getElementsByName("home_monthly_debts")[0].value = homeAffordInputVals.monthlyDebts.replace(/\B(?=(?:\d{3})+(?!\d))/g, ',');
+        }
+
         updateHomeAffordChart();
     })
     document.getElementsByName("home_down_payment")[0].addEventListener('input', () => {
+        homeAffordInputVals.downPayment = document.getElementsByName('home_down_payment')[0].value.replaceAll(',', '');
+        if (Number(homeAffordInputVals.downPayment) > Number(homeAffordInputVals.annualIncome)){
+            homeAffordInputVals.downPayment = homeAffordInputVals.annualIncome;
+            document.getElementsByName("home_down_payment")[0].value = homeAffordInputVals.downPayment.replace(/\B(?=(?:\d{3})+(?!\d))/g, ',');
+        }
+
         updateHomeAffordChart();
     })
     document.getElementsByName("home_monthly_debts")[0].addEventListener('input', () => {
+        homeAffordInputVals.monthlyDebts = document.getElementsByName('home_monthly_debts')[0].value.replaceAll(',', '');
+        
+        calculatePercent();
+
         updateHomeAffordChart();
     })
     document.getElementsByName("home_loan_term")[0].addEventListener('input', () => {
+        homeAffordInputVals.loanTerm = document.getElementsByName('home_loan_term')[0].value;
         updateHomeAffordChart();
     })
     document.getElementsByName("home-loan-term-minus")[0].addEventListener('click', () => {
+        homeAffordInputVals.loanTerm = document.getElementsByName('home_loan_term')[0].value;
         updateHomeAffordChart();
     })
     document.getElementsByName("home-loan-term-plus")[0].addEventListener('click', () => {
+        homeAffordInputVals.loanTerm = document.getElementsByName('home_loan_term')[0].value;
         updateHomeAffordChart();
     })
     document.getElementsByName("home_interest_rate")[0].addEventListener('input', () => {
+        homeAffordInputVals.interestRate = document.getElementsByName('home_interest_rate')[0].value;
         updateHomeAffordChart();
     })
     document.getElementsByName("home-debt-to-income")[0].addEventListener('input', () => {
+        if (1. * document.getElementsByName('home-debt-to-income')[0].value < 100.)
+            homeAffordInputVals.debtToIncome = document.getElementsByName('home-debt-to-income')[0].value;
+            
+        document.getElementsByName('home-debt-to-income')[0].value = homeAffordInputVals.debtToIncome;
+
+        calculateMonthlyDepth();
+        
         updateHomeAffordChart();
     })
-    document.getElementsByName("home_insurance")[0].addEventListener('input', () => {
+    document.getElementsByName("home_afford_insurance")[0].addEventListener('input', () => {
+        homeAffordInputVals.insurance = document.getElementsByName('home_afford_insurance')[0].value.replaceAll(',', '');
+
+        if (Number(homeAffordInputVals.insurance) > Number(homeAffordInputVals.annualIncome)){
+            homeAffordInputVals.insurance = homeAffordInputVals.annualIncome;
+            document.getElementsByName("home_afford_insurance")[0].value = homeAffordInputVals.insurance.replace(/\B(?=(?:\d{3})+(?!\d))/g, ',');
+        }
+
+        calculateMonthlyDepth();
         updateHomeAffordChart();
     })
     document.getElementsByName("home_property_tax")[0].addEventListener('input', () => {
+        homeAffordInputVals.taxes = document.getElementsByName('home_property_tax')[0].value.replaceAll(',', '');
+        calculateMonthlyDepth();
         updateHomeAffordChart();
     })
     document.getElementsByName("home_HOA_dues")[0].addEventListener('input', () => {
+        homeAffordInputVals.HOADues = document.getElementsByName('home_HOA_dues')[0].value.replaceAll(',', '');
+        calculateMonthlyDepth();
         updateHomeAffordChart();
     })
 }
@@ -172,19 +255,45 @@ function getTotal(){
 
 function createHomeAffordChart(){
     let vals = []
-    homeAffordOutputVals.PAndI = Math.random() * 5000 + 5000;
-    vals.push(homeAffordOutputVals.PAndI)
-    homeAffordOutputVals.taxes = Math.random() * 5000 + 5000;
+
+    const home = caclHomeAfford(homeAffordInputVals.monthlyDebts, homeAffordInputVals.downPayment, homeAffordInputVals.loanTerm, homeAffordInputVals.interestRate);
+    homeAffordOutputVals.PAndI = Number(home).toFixed(2);
+    vals.push(1. * homeAffordOutputVals.PAndI);
+    
+    homeAffordOutputVals.taxes = homeAffordOutputVals.PAndI * 0.01 * homeAffordInputVals.taxes;
     vals.push(homeAffordOutputVals.taxes)
-    homeAffordOutputVals.insurance = Math.random() * 5000 + 5000;
+
+    homeAffordOutputVals.insurance = 1. * homeAffordInputVals.insurance * homeAffordInputVals.loanTerm * MONTHES;
     vals.push(homeAffordOutputVals.insurance)
     
     options.series = vals
     homeAffordChart = new ApexCharts(homeAffordElement, options);
     homeAffordChart.render();
+
+    const total = (1. * homeAffordOutputVals.PAndI + 1. * homeAffordOutputVals.insurance + 1. * homeAffordOutputVals.taxes).toFixed();
+    document.getElementsByName('home-title-full')[0].textContent = String(total).replace(/\B(?=(?:\d{3})+(?!\d))/g, ',');
+    document.getElementsByName('home-title-monthly')[0].textContent = String((1. * homeAffordInputVals.monthlyDebts).toFixed()).replace(/\B(?=(?:\d{3})+(?!\d))/g, ',');
 }
 
 function updateHomeAffordChart(){
     homeAffordChart.destroy();
     createHomeAffordChart();
+}
+
+function calculateMonthlyDepth(){
+    let monthlyIncome = 1. * homeAffordInputVals.annualIncome / (MONTHES);
+    monthlyIncome = 1. * monthlyIncome - 1. * homeAffordInputVals.insurance - monthlyIncome * homeAffordInputVals.taxes / 100. - 1. * homeAffordInputVals.HOADues;
+    
+    if (1. * monthlyIncome < 0.0) monthlyIncome = 0.0;
+    homeAffordInputVals.monthlyDebts = (1. * monthlyIncome * homeAffordInputVals.debtToIncome / 100.).toFixed();
+    document.getElementsByName("home_monthly_debts")[0].value = String(homeAffordInputVals.monthlyDebts).replace(/\B(?=(?:\d{3})+(?!\d))/g, ',');
+}
+
+function calculatePercent(){
+    let monthlyIncome = 1. * homeAffordInputVals.annualIncome / (MONTHES);
+    monthlyIncome = 1. * monthlyIncome - 1. * homeAffordInputVals.insurance - monthlyIncome * homeAffordInputVals.taxes / 100. - 1. * homeAffordInputVals.HOADues;
+    if (monthlyIncome < 0) monthlyIncome = 0.0;
+    
+    homeAffordInputVals.debtToIncome = (100. * homeAffordInputVals.monthlyDebts / monthlyIncome).toFixed();
+    document.getElementsByName("home-debt-to-income")[0].value = String(homeAffordInputVals.debtToIncome);
 }

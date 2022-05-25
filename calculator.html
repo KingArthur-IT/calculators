@@ -532,7 +532,7 @@
                       <div class="calculator-form__field"> 
                         <div class="calculator-field__name">Home insurance (monthly)</div>
                         <div class="form-item"> 
-                          <input class="global-input calculator-input" type="text" name="home_insurance" value="800" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/\B(?=(?:\d{3})+(?!\d))/g, ',');">
+                          <input class="global-input calculator-input" type="text" name="home_afford_insurance" value="100" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/\B(?=(?:\d{3})+(?!\d))/g, ',');">
                           <div class="calculator-form__icon"> 
                             <svg class="icon icon-dollar ">
                               <use xlink:href="./assets/icon/symbol/sprite.svg#dollar"></use>
@@ -554,7 +554,7 @@
                       <div class="calculator-form__field"> 
                         <div class="calculator-field__name">HOA dues (monthly)</div>
                         <div class="form-item"> 
-                          <input class="global-input calculator-input" type="number" name="home_HOA_dues" value="0" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/\B(?=(?:\d{3})+(?!\d))/g, ',');">
+                          <input class="global-input calculator-input" type="text" name="home_HOA_dues" value="0" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/\B(?=(?:\d{3})+(?!\d))/g, ',');">
                           <div class="calculator-form__icon"> 
                             <svg class="icon icon-dollar ">
                               <use xlink:href="./assets/icon/symbol/sprite.svg#dollar"></use>
@@ -565,7 +565,7 @@
                     </div>
                   </form>
                   <div class="calculator-tab__graph">
-                    <div class="calculator-tab-graph__title global-title title-center">You may be able to afford a home worth $101,089, with a monthly payment of $1,010.</div>
+                    <div class="calculator-tab-graph__title global-title title-center">You may be able to afford a home worth $<span name="home-title-full">101,089</span>, with a monthly payment of $<span name="home-title-monthly">1,010</span>.</div>
                     <div class="calculator-tab__statistic"> 
                       <div id="home-afford-chart"></div>
                     </div>
